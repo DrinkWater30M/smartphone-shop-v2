@@ -1,24 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const cartController = require('../controller/CartController')
 
-/* GET cart page. */
-router.get('/cart', function(req, res, next) {
-  res.render('cart/cart.hbs');
-});
+/* Choice controller for /cart */
+router.get('/cart', cartController.getCartPage);
 
-/* GET wishlist page. */
-router.get('/wishlist', function(req, res, next) {
-    res.render('cart/wishlist.hbs');
-  });
+/* Choice controller for /wishlist */
+router.get('/wishlist', cartController.getWishlistPage);
 
-/* GET checkout page. */
-router.get('/checkout', function(req, res, next) {
-    res.render('cart/checkout.hbs');
-  });
+/* Choice controller for /checkout */
+router.get('/checkout', cartController.getCheckoutPage);
 
-  //* GET default
-  router.get('/thankyou', function(req, res, next) {
-    res.render('cart/thankyou.hbs');
-  });
+/* Choice controller for /thankyou */
+  router.get('/thankyou', cartController.getThankyouPage);
 
 module.exports = router;

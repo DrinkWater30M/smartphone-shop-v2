@@ -1,19 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const productsController = require('../controller/ProductsController')
 
 /* GET products page. */
-router.get('/', function(req, res, next) {
-  res.render('products/productsList');
-});
+router.get('/', productsController.getProductsListPage);
 
 /* GET products detail page. */
-router.get('/detail', function(req, res, next) {
-  res.render('products/productsDetail');
-});
+router.get('/detail', productsController.getProductsDetailPage);
 
 /* GET products compare page. */
-router.get('/productsCompare', function(req, res, next) {
-  res.render('products/productsCompare');
-});
+router.get('/productsCompare', productsController.getProductsCompare);
 
 module.exports = router;

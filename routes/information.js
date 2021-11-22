@@ -1,19 +1,11 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const informationController = require('../controller/InformationController')
 
 /* GET contact page. */
-router.get('/contact', function(req, res, next) {
-  res.render('information/contact.hbs');
-});
+router.get('/contact', informationController.getContactPage);
 
 /* GET about page. */
-router.get('/about', function(req, res, next) {
-  res.render('information/about.hbs');
-});
-
-/* GET default */
-router.get('/', function(req, res, next) {
-  res.render('information/contact.hbs');
-});
+router.get('/about', informationController.getAboutPage);
 
 module.exports = router;
