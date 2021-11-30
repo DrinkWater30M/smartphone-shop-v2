@@ -218,55 +218,23 @@
                         <!-- Swiper -->
                         <div class="swiper-container zoom-top">
                             <div class="swiper-wrapper">
+                                {{#each imageProductsDetail}}
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/images/product-image/product.jpg">
+                                    <img class="img-responsive m-auto" src={{'hinh_anh_san_phams.HinhAnh'}} alt="">
+                                    <a class="venobox full-preview" data-gall="myGallery" href={{'hinh_anh_san_phams.HinhAnh'}}>
                                         <i class="fa fa-arrows-alt" aria-hidden="true"></i>
                                     </a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/images/product-image/product.jpg">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/images/product-image/product.jpg">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/images/product-image/product.jpg">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                    <a class="venobox full-preview" data-gall="myGallery" href="/images/product-image/product.jpg">
-                                        <i class="fa fa-arrows-alt" aria-hidden="true"></i>
-                                    </a>
-                                </div>
+                                {{/each}}
                             </div>
                         </div>
                         <div class="swiper-container mt-20px zoom-thumbs slider-nav-style-1 small-nav">
                             <div class="swiper-wrapper">
+                                {{#each imageProductsDetail}}
                                 <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
+                                    <img class="img-responsive m-auto" src={{'hinh_anh_san_phams.HinhAnh'}} alt="">
                                 </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                </div>
-                                <div class="swiper-slide">
-                                    <img class="img-responsive m-auto" src="/images/product-image/product.jpg" alt="">
-                                </div>
+                                {{/each}}
                             </div>
                             <!-- Add Arrows -->
                             <div class="swiper-buttons">
@@ -275,12 +243,13 @@
                             </div>
                         </div>
                     </div>
+                    {{#with productsDetail}}
                     <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                         <div class="product-details-content quickview-content ml-25px">
-                            <h2>Điện Thoại Iphone 13 Pro Max</h2>
+                            <h2>{{TenSanPham}}</h2>
                             <div class="pricing-meta">
                                 <ul class="d-flex">
-                                    <li class="new-price">1.000.000đ</li>
+                                    <li class="new-price">{{'loai_san_phams.DonGia'}}</li>
                                 </ul>
                             </div>
                             <div class="pro-details-rating-wrap">
@@ -291,14 +260,19 @@
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <span class="read-review"><a class="reviews" href="#">(5đánh giá)</a></span>
+                                <span class="read-review"><a class="reviews" href="#">(2 đánh giá)</a></span>
                             </div>
-                            <p class="mt-30px">Đây là mô tả nhanh sản phẩm:ff sf s f sf s f s f s fw r  ewr ư r ư r ư re ư r ử  ử ư rư ư f a  s f s sf ư fw r ư r ư r ử ư r s f sf s f ư r ư t re t ert e g e  fssfsfsfsfs f sf s f s f sf s f s g  r te rt e  ư rư  rư  rư f s sf s f s f sfs f</p>
+                            <p class="mt-30px">Ram: {{'loai_san_phams.Ram'}}; Bớ nhớ trong: {{'loai_san_phams.Rom'}}; Màn hình: {{'loai_san_phams.ManHinh'}}; Pin: {{'loai_san_phams.Pin'}}</p>
                             <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
                                 <span>Loại:</span>
                                 <ul class="d-flex">
                                     <li>
-                                        <a href="#">128GB</a>
+                                        {{!-- <select name="product-type" id="">
+                                            <option value="3/32">3GB/32GB</option>
+                                            <option value="3/32">4GB/64GB</option>
+                                            <option value="3/32">4GB/128GB</option>
+                                        </select> --}}
+                                        <a href="#">{{'loai_san_phams.Ram'}}/{{'loai_san_phams.Rom'}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -306,7 +280,7 @@
                                 <span>Màu sắc: </span>
                                 <ul class="d-flex">
                                     <li>
-                                        <a href="#">Xanh lá</a>
+                                        <a href="#">{{'loai_san_phams.MauSac'}}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -331,26 +305,26 @@
                             <div class="description-review-topbar nav">
                                 <button data-bs-toggle="tab" data-bs-target="#des-details2">Thông số</button>
                                 <button class="active" data-bs-toggle="tab" data-bs-target="#des-details1">Mô tả</button>
-                                <button data-bs-toggle="tab" data-bs-target="#des-details3">Đánh giá (02)</button>
+                                <button data-bs-toggle="tab" data-bs-target="#des-details3">Đánh giá (2)</button>
                             </div>
                             <div class="tab-content description-review-bottom">
                                 <div id="des-details2" class="tab-pane">
                                     <div class="product-anotherinfo-wrapper text-start">
                                         <ul>
-                                            <li><span>Ram</span> 6GB</li>
-                                            <li><span>Rom</span> 128GB</li>
-                                            <li><span>Màn hình</span> OLED</li>
-                                            <li><span>Độ phân giải</span> full HD</li>
-                                            <li><span>Chip xử lí</span> A15 6 nhân</li>
-                                            <li><span>Pin</span> 4000mAh</li>
-                                            <li><span>Màu sắc</span> Bạc</li>
+                                            <li><span>Ram: </span> {{'loai_san_phams.Ram'}}</li>
+                                            <li><span>Rom: </span> {{'loai_san_phams.Rom'}}</li>
+                                            <li><span>Màn hình: </span> {{'loai_san_phams.ManHinh'}}</li>
+                                            <li><span>Độ phân giải: </span> {{'loai_san_phams.DoPhanGiai'}}</li>
+                                            <li><span>Chip xử lí: </span> {{'loai_san_phams.ChipXuLi'}}</li>
+                                            <li><span>Pin: </span> {{'loai_san_phams.Pin'}}</li>
+                                            <li><span>Màu sắc: </span> {{'loai_san_phams.MauSac'}}</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div id="des-details1" class="tab-pane active">
                                     <div class="product-description-wrapper">
                                         <p>
-                                           đây là mô tả chi tiết sản phẩm:ff sf s f sf s f s f s fw r  ewr ư r ư r ư re ư r ử  ử ư rư ư f a  s f s sf ư fw r ư r ư r ử ư r s f sf s f ư r ư t re t ert e g e  fssfsfsfsfs f sf s f s f sf s f s g  r te rt e  ư rư  rư  rư f s sf s f s f sff sf s f sf s f s f s fw r  ewr ư r ư r ư re ư r ử  ử ư rư ư f a  s f s sf ư fw r ư r ư r ử ư r s f sf s f ư r ư t re t ert e g e  fssfsfsfsfs f sf s f s f sf s f s g  r te rt e  ư rư  rư  rư f s sf s f s f sfsff sf s f sf s f s f s fw r  ewr ư r ư r ư re ư r ử  ử ư rư ư f a  s f s sf ư fw r ư r ư r ử ư r s f sf s f ư r ư t re t ert e g e  fssfsfsfsfs f sf s f s f sf s f s g  r te rt e  ư rư  rư  rư f s sf s f s f sf
+                                            {{MoTa}}
                                         </p>
                                     </div>
                                 </div>
@@ -459,6 +433,7 @@
                         </div>
                         <!-- product details description area end -->
                     </div>
+                    {{/with}}
                 </div>
             </div>
         </div>

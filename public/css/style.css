@@ -6666,6 +6666,7 @@ body.offcanvas-open {
   font-weight: 300;
   line-height: 1;
 }
+
 .shop-sidebar-wrap .sidebar-widget-category li a:hover,
 .shop-sidebar-wrap .sidebar-widget-color li a:hover,
 .shop-sidebar-wrap .sidebar-widget-ram li a:hover,
@@ -6673,6 +6674,17 @@ body.offcanvas-open {
 .shop-sidebar-wrap .sidebar-widget-brand li a:hover {
   color: #266bf9;
 }
+
+.shop-sidebar-wrap .sidebar-widget-ram li a.active,
+.shop-sidebar-wrap .sidebar-widget-rom li a.active,
+.shop-sidebar-wrap .sidebar-widget-brand li a.active {
+  color: #266bf9;
+}
+
+.shop-sidebar-wrap .sidebar-widget-color li a.active {
+  transform: scale(1.5);
+}
+
 .shop-sidebar-wrap .sidebar-widget-color li a {
   width: 14px;
   height: 14px;
@@ -6683,44 +6695,25 @@ body.offcanvas-open {
   background-color: #39ed8c;
 }
 .shop-sidebar-wrap .sidebar-widget-color li a.color-2 {
-  background-color: #a6ed42;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-3 {
-  background-color: #daed39;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-4 {
   background-color: #eed739;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-5 {
-  background-color: #eca23a;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-6 {
-  background-color: #f36768;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-7 {
+.shop-sidebar-wrap .sidebar-widget-color li a.color-3 {
   background-color: #e14755;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-8 {
-  background-color: #dc83a3;
+.shop-sidebar-wrap .sidebar-widget-color li a.color-4 {
+  background-color: #df75dd;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-9 {
-  background-color: #dc82da;
+.shop-sidebar-wrap .sidebar-widget-color li a.color-5 {
+  background-color: #a200ff;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-10 {
-  background-color: #9a82dd;
+.shop-sidebar-wrap .sidebar-widget-color li a.color-6 {
+  background-color: #000000;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-11 {
-  background-color: #82c2db;
+.shop-sidebar-wrap .sidebar-widget-color li a.color-7 {
+  background-color: #ffffff;
+  border: #000000 2px solid;
 }
-.shop-sidebar-wrap .sidebar-widget-color li a.color-12 {
-  background-color: #6bd6b0;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-13 {
-  background-color: #9ed76b;
-}
-.shop-sidebar-wrap .sidebar-widget-color li a.color-14 {
-  background-color: #9ed76b;
-}
+
 .shop-sidebar-wrap .sidebar-widget-ram li a {
   font-weight: 500;
 }
@@ -10031,4 +10024,12 @@ Pages - My Account
     width: 190px;
     height: 54px;
   }
+}
+
+/* CSS something that I add to project */
+#filter-prices {
+  margin-top: 30px;
+  padding: 0 10px;
+  border: solid 2px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
 }
