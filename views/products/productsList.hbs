@@ -338,15 +338,15 @@
                                 </div>
 
                                 <div class="tab-pane fade mb-n-30px" id="shop-list">
-                                    {{#each productsList}}
                                     <div class="shop-list-wrapper mb-30px">
+                                        {{#each productsList}}
                                         <div class="row">
                                             <div class="col-md-5 col-lg-5 col-xl-4 mb-lm-30px">
                                                 <div class="product" id={{MaSanPham}}>
                                                     <div class="thumb">
                                                         <a href="/products/detail?id={{MaSanPham}}" class="image">
-                                                            <img src="/images/product-image/product.jpg" alt="Product" />
-                                                            <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
+                                                            <img src={{'hinh_anh_san_phams.HinhAnh'}} alt="Product" />
+                                                            <img class="hover-image" src={{'hinh_anh_san_phams.HinhAnh'}} alt="Product" />
                                                         </a>
                                                         <span class="badges">
                                                         <span class="new">Mới</span>
@@ -357,13 +357,13 @@
                                             <div class="col-md-7 col-lg-7 col-xl-8">
                                                 <div class="content-desc-wrap">
                                                     <div class="content">
-                                                        <span class="category"><a href="#">{{ThuongHieu}}</a></span>
+                                                        <span class="category"><a href="#">{{'MaThuongHieu_thuong_hieu.ThuongHieu'}}</a></span>
                                                         <h5 class="title"><a href="/products/detail?id={{MaSanPham}}">{{TenSanPham}}</a></h5>
                                                         <p>{{MoTa}}</p>
                                                     </div>
                                                     <div class="box-inner">
                                                         <span class="price">
-                                                        <span class="new">$38.50</span>
+                                                        <span class="new">{{'loai_san_phams.DonGia'}}</span>
                                                         </span>
                                                         <div class="actions">
                                                             <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
@@ -378,8 +378,8 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {{/each}}
                                     </div>
-                                    {{/each}}
                                     
                                 </div>
                             </div>

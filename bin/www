@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
+
+
+/**
+ * Configure dotenv and check connection
+ */
+ require('dotenv').config();
+
+
 /**
      * Module dependencies.
      */
@@ -8,10 +16,6 @@
  var debug = require('debug')('phoneshop:server');
  var http = require('http');
 
-/**
- * Configure dotenv and check connection
- */
-require('dotenv').config({path: '../config.env'});
 const {sequelize} = require('../models/index');
 
 sequelize.authenticate()
@@ -99,8 +103,8 @@ sequelize.authenticate()
       return false;
     }
 })
-  .catch (error => {
-    console.error('Unable to connect to the database:', error);
-  })
+.catch (error => {
+  console.error('Unable to connect to the database:', error);
+})
 
 

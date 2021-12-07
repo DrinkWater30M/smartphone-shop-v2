@@ -224,7 +224,7 @@
                         <li><a href="#address" data-bs-toggle="tab" class="nav-link">Địa chỉ</a></li>
                         <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin cá nhân</a>
                         </li>
-                        <li><a href="/user/login" class="nav-link">Đăng xuất</a></li>
+                        <li><a href="/user/logout" class="nav-link">Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>
@@ -289,6 +289,7 @@
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_login_form">
+                                    {{#with user}}
                                     <form action="#">
                                         <div class="input-radio">
                                             <span class="custom-radio"><input type="radio" value="1"
@@ -297,29 +298,30 @@
                                                 name="id_gender"> Nữ</span>
                                         </div> <br>
                                         <div class="default-form-box mb-20">
-                                            <label>Họ</label>
-                                            <input type="text" name="first-name">
-                                        </div>
-                                        <div class="default-form-box mb-20">
-                                            <label>Tên</label>
-                                            <input type="text" name="last-name">
+                                            <label>Họ tên</label>
+                                            <input type="text" name="name" value="{{HoTen}}">
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>Email</label>
-                                            <input type="text" name="email-name">
-                                        </div>
-                                        <div class="default-form-box mb-20">
-                                            <label>Mật khẩu</label>
-                                            <input type="password" name="user-password">
+                                            <input type="text" name="email" value="{{Email}}">
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>Ngày sinh</label>
                                             <input type="date" name="birthday">
                                         </div>
+                                        <div class="default-form-box mb-20">
+                                            <label>Số điện thoại</label>
+                                            <input type="text" name="phone" value="{{SoDienThoai}}">
+                                        </div>
+                                        <div class="default-form-box mb-20">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="address" value="{{DiaChiGiaoHang}}">
+                                        </div>
                                         <div class="save_button mt-3">
                                             <button class="btn" type="submit">Save</button>
                                         </div>
                                     </form>
+                                    {{/with}}
                                 </div>
                             </div>
                         </div>

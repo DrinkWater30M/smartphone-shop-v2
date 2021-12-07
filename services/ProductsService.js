@@ -1,7 +1,7 @@
 'use strict';
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize/dist');
-const {models, sequelize} = require('../models/index');
+const {sequelize, models} = require('../models/index');
 
 class ProductsService{
     getProductsList(itemsPerPage, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
