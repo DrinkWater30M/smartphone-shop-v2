@@ -31,11 +31,8 @@ class ProductsController{
 
         //Get data from DB
         let productsList = await productsService.getProductsList(ITEMS_PER_PAGE, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort);
-        console.log(productsList)
 
         let brandsList = await productsService.getBrandsList();
-        console.log(brandsList)
-        console.log(productsList);
 
         //Get total products
         let totalProducts = productsList.length;

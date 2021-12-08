@@ -6,19 +6,19 @@ const authenticationService = require('../services/AuthenticationService');
 passport.use(new LocalStrategy(
     {
         usernameField: 'email',
-        passwordField: 'password'
+        passwordField: 'password',
+        passReqToCallback: true
     },
-
-     async function(email, password, done) {
+    async function(req, email, password, done) {
         try{
             let user = await authenticationService.getUserInformation(email);
             
             if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
+                return done(null, false, req.flash('message', 'Email chưa được đăng kí! Hãy tạo tài khoản!' ));
             }
 
             if (!validPassword(user.MatKhau, password)) {
-                return done(null, false, { message: 'Incorrect password.' });
+                return done(null, false, req.flash('message', 'Mật khẩu không chính xác!' ));
             }
 
             return done(null, user);

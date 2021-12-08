@@ -230,8 +230,9 @@
                             <div class="login-form-container">
                                 <div class="login-register-form">
                                     <form method="post">
-                                        <input type="email" name="email" placeholder="Email" />
+                                        <input type="email" name="email" placeholder="Email"/>
                                         <input type="password" name="password" placeholder="Mật khẩu" />
+                                        {{#with error}}<span style="color: red; font-size: 0.9em;">{{message}}</span>{{/with}}
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
                                                 <a href="#">Quên mật khẩu?</a>
@@ -245,15 +246,19 @@
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form  method="post">
-                                        <input type="email" name="email" placeholder="Email" />
-                                        <input type="password" name="password" placeholder="Mật khẩu" />
-                                        <input type="password" placeholder="Xác nhận mật khẩu" />
+                                    <form  id="register" method="post">
+                                        <span id="register-email-error" style="color:red; font-size: 0.9em;"></span>
+                                        <input id="register-email" type="email" name="email" placeholder="Email" />
+
+                                         <span id="register-password-error" style="color:red; font-size: 0.9em;"></span><input id="register-password"type="password" name="password" placeholder="Mật khẩu" />
+
+                                         <span id="register-confirm-password-error" style="color:red; font-size: 0.9em;"></span>
+                                        <input id="register-confirm-password" type="password" placeholder="Xác nhận mật khẩu" />
                                         <div class="button-box">
-                                            <button type="submit"><span>Đăng kí</span></button>
+                                            <button id="register-submit" type="button"><span>Đăng kí</span></button>
                                         </div>
                                     </form>
-                                </div>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -263,3 +268,6 @@
     </div>
 </div>
 <!-- login area end -->
+
+{{!-- Handler for client side --}}
+<script src="/js/login-validate.js" defer></script>

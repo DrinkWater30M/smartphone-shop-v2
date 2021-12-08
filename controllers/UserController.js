@@ -15,7 +15,12 @@ class UserController{
       }
 
     getLoginPage(req, res, next) {
-        res.render('user/login.hbs');
+        console.log(req.body.email, req.body.password);
+        res.render("user/login.hbs", 
+        { 
+            error: {message: req.flash('message'),
+        }
+    });
     }
 
     logout(req, res, next){
