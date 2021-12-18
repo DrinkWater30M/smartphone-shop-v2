@@ -15,6 +15,12 @@ router.post('/login', passport.authenticate('local', {
     failureRedirect: '/user/login'}
 ));
 
+/* POST register page. */
+router.get('/register', userController.getRegisterPage);
+
+/* POST register page. */
+router.post('/register', userController.register);
+
 /* Log out page. */
 router.get('/logout', userController.logout);
 

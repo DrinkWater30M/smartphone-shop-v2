@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     MaKhachHang: {
-      type: DataTypes.CHAR(10),
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: 'khach_hang',

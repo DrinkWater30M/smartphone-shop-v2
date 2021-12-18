@@ -1,7 +1,7 @@
 const passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
-
 const authenticationService = require('../services/AuthenticationService');
+const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy(
     {
@@ -14,10 +14,11 @@ passport.use(new LocalStrategy(
             let user = await authenticationService.getUserInformation(email);
             
             if (!user) {
-                return done(null, false, req.flash('message', 'Email chưa được đăng kí! Hãy tạo tài khoản!' ));
+                return done(null, false, 
+                    req.flash('message', ['Email chưa được đăng kí! Hãy tạo tài khoản!', email] ));
             }
 
-            if (!validPassword(user.MatKhau, password)) {
+            if (!await validPassword(password, user.MatKhau, )) {
                 return done(null, false, req.flash('message', 'Mật khẩu không chính xác!' ));
             }
 
@@ -41,8 +42,9 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
 });
 
-function validPassword(passwordOfUser, password){
-    return passwordOfUser === password;
+async function validPassword(password, passwordHash){
+    const match = await bcrypt.compare(password, passwordHash);
+    return match;
 }
 
 module.exports = passport;

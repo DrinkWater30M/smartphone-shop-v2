@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('khach_hang', {
     MaKhachHang: {
-      type: DataTypes.CHAR(10),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -10,17 +11,13 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: true
     },
-    TenDangNhap: {
-      type: DataTypes.STRING(20),
-      allowNull: false
-    },
     MatKhau: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.TEXT,
       allowNull: false
     },
     Email: {
       type: DataTypes.STRING(100),
-      allowNull: true
+      allowNull: false
     },
     SoDienThoai: {
       type: DataTypes.CHAR(10),
