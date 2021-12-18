@@ -229,13 +229,12 @@
                         <div id="lg1" class="tab-pane active">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Tên đăng nhập" />
-                                        <input type="password" name="user-password" placeholder="Mật khẩu" />
+                                    <form method="post" action="/user/login">
+                                        <input type="email" name="email" placeholder="Email"/>
+                                        <input type="password" name="password" placeholder="Mật khẩu" />
+                                        {{#with errorLogin}}<span style="color: red; font-size: 0.9em;">{{message}}</span>{{/with}}
                                         <div class="button-box">
                                             <div class="login-toggle-btn">
-                                                <input type="checkbox" />
-                                                <a class="flote-none" href="javascript:void(0)">Nhớ mật khẩu</a>
                                                 <a href="#">Quên mật khẩu?</a>
                                             </div>
                                             <button type="submit"><span>Đăng nhập</span></button>
@@ -247,16 +246,20 @@
                         <div id="lg2" class="tab-pane">
                             <div class="login-form-container">
                                 <div class="login-register-form">
-                                    <form action="#" method="post">
-                                        <input type="text" name="user-name" placeholder="Tên đăng nhập" />
-                                        <input type="password" name="user-password" placeholder="Mật khẩu" />
-                                        <input type="password" name="user-confirm-password" placeholder="Xác nhận mật khẩu" />
-                                        <input name="user-email" placeholder="Email" type="email" />
+                                    <form  id="register" method="post" action="/user/register">
+                                        <span id="register-email-error" style="color:red; font-size: 0.9em;"></span>
+                                        <input id="register-email" type="email" name="email" placeholder="Email" />
+
+                                         <span id="register-password-error" style="color:red; font-size: 0.9em;"></span><input id="register-password"type="password" name="password" placeholder="Mật khẩu" />
+
+                                         <span id="register-confirm-password-error" style="color:red; font-size: 0.9em;"></span>
+                                        <input id="register-confirm-password" type="password" placeholder="Xác nhận mật khẩu" />
+                                        {{#with errorRegister}}<span style="color: red; font-size: 0.9em;">{{message}}</span>{{/with}}
                                         <div class="button-box">
-                                            <button type="submit"><span>Đăng kí</span></button>
+                                            <button id="register-submit" type="button"><span>Đăng kí</span></button>
                                         </div>
                                     </form>
-                                </div>
+                                 </div>
                             </div>
                         </div>
                     </div>
@@ -266,3 +269,6 @@
     </div>
 </div>
 <!-- login area end -->
+
+{{!-- Handler for client side --}}
+<script src="/js/login-validate.js" defer></script>

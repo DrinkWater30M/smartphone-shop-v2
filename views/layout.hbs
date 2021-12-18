@@ -43,7 +43,14 @@
                                 <ul>
                                     <li><a href="#"><i class="fa fa-phone"></i> +84000000000</a></li>
                                     <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                                    <li><a href="/user/login"><i class="fa fa-user"></i> Tài khoản</a></li>
+                                    {{#if user}}
+                                    <form id="account-information" method="POST" action="/user/account">
+                                        <input type="hidden" name="email" value={{user.Email}}>
+                                    </form>
+                                    <li><a href="javascript:{}" class="account"><i class="fa fa-user"></i>Tài khoản</a></li>
+                                    {{else}}
+                                    <li><a href="/user/login"><i class="fa fa-user"></i>Đăng nhập</a></li>
+                                    {{/if}}
                                 </ul>
                             </div>
                         </div>
@@ -527,6 +534,9 @@
         </div>
     </div>
     <!-- Global Vendor, plugins JS -->
+
+    <!-- JS Files for submit account-->
+    <script src="/js/layout-account.js" defer></script>
     <!-- JS Files
     ============================================ -->
     <script src="/js/vendor/bootstrap.bundle.min.js"></script>
