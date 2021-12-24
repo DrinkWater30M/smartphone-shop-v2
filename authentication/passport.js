@@ -15,7 +15,7 @@ passport.use(new LocalStrategy(
             
             if (!user) {
                 return done(null, false, 
-                    req.flash('message', ['Email chưa được đăng kí! Hãy tạo tài khoản!', email] ));
+                    req.flash('message', ['Email chưa được đăng kí! Hãy tạo tài khoản!'] ));
             }
 
             if (!await validPassword(password, user.MatKhau, )) {

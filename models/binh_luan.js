@@ -2,13 +2,14 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('binh_luan', {
     MaBinhLuan: {
-      type: DataTypes.CHAR(10),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     MaSanPham: {
       type: DataTypes.CHAR(10),
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'san_pham',
         key: 'MaSanPham'
@@ -16,15 +17,15 @@ module.exports = function(sequelize, DataTypes) {
     },
     MaKhachHang: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'khach_hang',
         key: 'MaKhachHang'
       }
     },
-    TenDuPhong: {
-      type: DataTypes.STRING(50),
-      allowNull: true
+    DanhGia: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     NoiDung: {
       type: DataTypes.TEXT,
