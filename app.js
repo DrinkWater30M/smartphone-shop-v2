@@ -12,6 +12,7 @@ const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/cart');
 const userRouter = require('./routes/user');
 const informationRouter = require('./routes/information');
+const api = require('./routes/api');
 
 const app = express();
 
@@ -24,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({name: 'session', secret: process.env.SESSION_SECRET ,maxAge: 24 * 60 * 60 * 1000}))
+app.use(session({name: 'session', secret: process.env.SESSION_SECRET ,maxAge: 365 * 24 * 60 * 60 * 1000}))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -39,6 +40,7 @@ app.use('/products', productsRouter);
 app.use('/cart', cartRouter);
 app.use('/user', userRouter);
 app.use('/information', informationRouter);
+app.use('/api', api);
 
 
 // catch 404 and forward to error handler

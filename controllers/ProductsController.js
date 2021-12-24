@@ -58,26 +58,22 @@ class ProductsController{
       const id = req.query.id;
 
       //Get a product with id
-      let productsDetail =  await productsService.getProductsDetail(id);
+      let productDetail =  await productsService.getProductDetail(id);
 
-      //Get a image products detail with id
-      let imageProductsDetail =  await productsService.getImageProductsDetail(id);
+      //Get some ating of customer
+      let someRating = await productsService.getSomeRating(id);
 
-      //Get comment of customer
-      // let commentProductsDetail = await productsService.getCommentProductsDetail(id);
-      // console.log(commentProductsDetail)
-      //Total comment
-      // let totalComments = commentProductsDetail.length;
-      // console.log(totalComments)
+      //Total rating
+      let totalRating = await productsService.totalRating(id);
+
+      //Get related products
+      let relatedProducts = await productsService.getRelatedProducts(id);
 
       //return view + data
       res.render(
         'products/productsDetail', 
         {
-          productsDetail: productsDetail,
-          imageProductsDetail: imageProductsDetail,
-          // commentProductsDetail: commentProductsDetail,
-          // totalComments: {totalComments: totalComments},
+          productDetail, someRating, totalRating, relatedProducts
         }
       );
     }

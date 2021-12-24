@@ -3979,7 +3979,8 @@ body.offcanvas-open {
   -ms-flex-align: center;
   align-items: center;
 }
-.comment-area .single-review .review-content .review-top-wrap .review-left {
+.comment-area .single-review .review-content .review-top-wrap .review-left,
+.comment-area .single-review .review-content .review-top-wrap .review-right {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3989,6 +3990,7 @@ body.offcanvas-open {
   .review-content
   .review-top-wrap
   .review-left
+  .review-right
   .review-name
   .title {
   font-size: 18px;
@@ -4002,6 +4004,7 @@ body.offcanvas-open {
     .review-content
     .review-top-wrap
     .review-left
+    .review-right
     .review-name
     .title {
     font-size: 20px;
@@ -4012,6 +4015,7 @@ body.offcanvas-open {
   .review-content
   .review-top-wrap
   .review-left
+  .review-right
   .review-name
   span {
   font-weight: 400;
@@ -7552,8 +7556,8 @@ body.offcanvas-open {
   }
 }
 .description-review-bottom .ratting-form-wrapper {
-  padding-top: 50px;
   line-height: 1;
+  margin-bottom: 25px;
 }
 .description-review-bottom .ratting-form-wrapper h3 {
   margin: 0;
@@ -7577,6 +7581,7 @@ body.offcanvas-open {
   overflow: hidden;
   font-size: 14px;
   color: #ffde00;
+  cursor: pointer;
 }
 .description-review-bottom .ratting-form-wrapper .rating-form-style {
   margin-bottom: 10px;
@@ -7608,7 +7613,7 @@ body.offcanvas-open {
   color: #3a3a3a;
   height: 180px;
   padding: 20px 10px 2px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
   outline: none;
 }
@@ -7631,13 +7636,13 @@ body.offcanvas-open {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .description-review-bottom .ratting-form-wrapper {
-    margin-top: 50px;
+    margin: 50px 0 25px 0;
     padding: 0;
   }
 }
 @media only screen and (max-width: 767px) {
   .description-review-bottom .ratting-form-wrapper {
-    margin-top: 50px;
+    margin: 0 25px;
     padding: 0;
   }
 }
@@ -10032,4 +10037,15 @@ Pages - My Account
   padding: 0 10px;
   border: solid 2px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+}
+
+.description-review-bottom .ratting-form-wrapper .detail-comments-btn {
+  border-bottom: solid 2px rgba(0, 0, 0, 0.06);
+  padding: 1em;
+  text-align: center;
+}
+
+.description-review-bottom .ratting-form-wrapper .detail-comments-btn button {
+  font: 1em;
+  padding: 0 1em;
 }

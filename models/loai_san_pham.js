@@ -23,10 +23,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    HinhAnhMinhHoa: {
-      type: DataTypes.STRING(200),
-      allowNull: true
-    },
     Ram: {
       type: DataTypes.STRING(10),
       allowNull: true
