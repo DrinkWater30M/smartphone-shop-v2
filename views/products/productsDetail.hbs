@@ -375,6 +375,7 @@
                                 <div class="col-lg-12">
                                     <div class="ratting-form-wrapper pl-50">
                                         <div class="ratting-form">
+                                            {{#if user}}
                                             <form id="comment-form">
                                                 <input name="idUser" type="hidden" value="1">
 
@@ -397,17 +398,18 @@
                                                     <div class="col-md-12">
                                                         <div class="rating-form-style form-submit">
                                                             <textarea name="content" placeholder="Nội dung"></textarea>
-                                                            <div id="error-add-comment" style="color: red; font-size: 0.9em; margin-bottom: 1em;"></div>
-                                                            <button id="add-comment-btn" class="btn btn-primary btn-hover-color-primary" type="button">Đánh giá</button>
+                                                            <div id="error-add-rating" style="color: red; font-size: 0.9em; margin-bottom: 1em;"></div>
+                                                            <button id="add-rating-btn" class="btn btn-primary btn-hover-color-primary" type="button">Đánh giá</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
+                                            {{/if}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div id="new-comment"></div>
+                                    <div id="new-rating"></div>
                                     {{#each someRating}}
                                     <div class="review-wrapper">
                                         <div class="single-review">
@@ -423,11 +425,9 @@
                                                     </div>
                                                     <div class="review-left">
                                                         <div class="rating-product">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
+                                                            {{#each DanhGia}}
+                                                            <i class="fa fa-star" style="color:{{this}};"></i>
+                                                            {{/each}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -441,11 +441,13 @@
                                         </div>
                                     </div>
                                     {{/each}}
+                                    <div id="more-rating"></div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="ratting-form-wrapper pl-50">
                                         <div class="detail-comments-btn">
-                                            <button>Xem thêm</button>
+                                            <input name="rating-page" type="hidden" value="0">
+                                            <button id="more-rating-btn">Xem thêm</button>
                                         </div>
                                     </div>
                                 </div>
@@ -520,5 +522,5 @@
     </div>
 </div>
 <!-- Product Area End -->
-<!-- Javascript for client side -->
-<script src="/js/products-detail-add-comment.js" defer></script>
+<!-- Handle client side -->
+<script src="/js/products-detail-handler.js" defer></script>

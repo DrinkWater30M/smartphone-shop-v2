@@ -55,19 +55,19 @@ class ProductsController{
 
     async getProductsDetailPage(req, res) {
       //Get id product from query
-      const id = req.query.id;
+      const idProduct = req.query.id;
 
       //Get a product with id
-      let productDetail =  await productsService.getProductDetail(id);
+      let productDetail =  await productsService.getProductDetail(idProduct);
 
-      //Get some ating of customer
-      let someRating = await productsService.getSomeRating(id);
+      //Get some rating of customer: 2 new rating
+      let someRating = await productsService.getSomeRating(idProduct, 0, 2);
 
       //Total rating
-      let totalRating = await productsService.totalRating(id);
+      let totalRating = await productsService.totalRating(idProduct);
 
       //Get related products
-      let relatedProducts = await productsService.getRelatedProducts(id);
+      let relatedProducts = await productsService.getRelatedProducts(idProduct);
 
       //return view + data
       res.render(

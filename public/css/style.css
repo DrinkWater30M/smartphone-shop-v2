@@ -10048,4 +10048,12 @@ Pages - My Account
 .description-review-bottom .ratting-form-wrapper .detail-comments-btn button {
   font: 1em;
   padding: 0 1em;
+  cursor: pointer;
+}
+
+.description-review-bottom
+  .ratting-form-wrapper
+  .detail-comments-btn
+  button:hover {
+  color: blue;
 }
