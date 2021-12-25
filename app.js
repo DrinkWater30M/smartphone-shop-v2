@@ -13,6 +13,7 @@ const cartRouter = require('./routes/cart');
 const userRouter = require('./routes/user');
 const informationRouter = require('./routes/information');
 const api = require('./routes/api');
+const middleware = require('./middleware/MiddleWare');
 
 const app = express();
 
@@ -37,11 +38,10 @@ app.use(function(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/products', productsRouter);
-app.use('/cart', cartRouter);
+app.use('/cart', middleware.isLogin, cartRouter);
 app.use('/user', userRouter);
 app.use('/information', informationRouter);
 app.use('/api', api);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
