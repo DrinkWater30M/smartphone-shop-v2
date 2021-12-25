@@ -131,18 +131,34 @@ class ProductsService{
         }
     }
 
-    async getSomeRating(id){
+    async getSomeRating(idProduct, offset, count){
         try{
             let someRating = await sequelize.query(
-                `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, binh_luan.DanhGia, binh_luan.NoiDung, binh_luan.ThoiGian
+                `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, khach_hang.Email,
+                binh_luan.DanhGia, binh_luan.NoiDung, binh_luan.ThoiGian
                 FROM binh_luan JOIN san_pham ON binh_luan.MaSanPham = san_pham.MaSanPham
                 JOIN khach_hang ON binh_luan.MaKhachHang = khach_hang.MaKhachHang
-                WHERE san_pham.MaSanPham = '${id}'
+                WHERE san_pham.MaSanPham = '${idProduct}'
                 ORDER BY binh_luan.ThoiGian DESC
-                LIMIT 0, 2`,
+                LIMIT ${offset}, ${count}`,
                 {type: QueryTypes.SELECT}
             );
             
+            //Create color of star from DanhGia to rander with handlebars
+            someRating.forEach((rating) => {
+                let stars = rating.DanhGia;
+                rating.DanhGia = [];
+                for(let i = 0; i < 5; i++){
+                    if(i < stars){
+                        rating.DanhGia.push('#ffde00');
+                    }
+                    else{
+                        rating.DanhGia.push('silver');
+                    }
+                }
+            }
+            )
+
             return someRating;
         }
         catch(error){
@@ -171,8 +187,11 @@ class ProductsService{
         }
     }
 
-    async addComment(idUser, idProduct, rating, content){
+    async addRating(idUser, idProduct, rating, content){
+        //Get datetime of rating
         let dateTime = new Date().toJSON().slice(0, 19).replace('T', ' ');
+
+        //Write data to DB
         try{
             await sequelize.query(
                 `INSERT INTO binh_luan(MaSanPham, MaKhachHang, DanhGia, NoiDung, ThoiGian)
@@ -180,7 +199,8 @@ class ProductsService{
             );
 
             let user = await sequelize.query(
-                `SELECT khach_hang.HoTen, khach_hang.Email FROM khach_hang WHERE khach_hang.MaKhachHang = ${idUser}`,
+                `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, khach_hang.Email
+                FROM khach_hang WHERE khach_hang.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT});
             
             return {user: user[0], rating, content, dateTime: new Date(dateTime.replace(" ", "T") + "Z").toString()};

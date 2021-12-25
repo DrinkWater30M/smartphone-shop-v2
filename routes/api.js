@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const apiProductsController = require('../api/ApiProductsController');
 
-/* Get comment */
-router.get('/products/detail/comments', apiProductsController.getSomeComment);
+/* Get rating */
+router.get('/products/detail/more-rating', apiProductsController.getSomeRating);
 
-/* Post comment */
-router.post('/products/detail/add-comment', apiProductsController.addComment);
+/* Post rating */
+router.post('/products/detail/add-rating', apiProductsController.addRating);
 
 module.exports = router;
