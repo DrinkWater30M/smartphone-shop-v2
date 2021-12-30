@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/UserController');
 const passport = require('../authentication/passport');
+const middleware = require('../middleware/MiddleWare');
 
 /* GET account page. */
-router.post('/account', userController.getAccountPage);
+router.post('/account', middleware.isLogin, userController.getAccountPage);
 
 /* GET login page. */
 router.get('/login', userController.getLoginPage);
@@ -22,6 +23,6 @@ router.get('/register', userController.getRegisterPage);
 router.post('/register', userController.register);
 
 /* Log out page. */
-router.get('/logout', userController.logout);
+router.get('/logout', middleware.isLogin, userController.logout);
 
 module.exports = router;

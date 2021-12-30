@@ -13,7 +13,7 @@ class CartController{
       }
 
     getThankyouPage(req, res, next) {
-    res.render('cart/thankyou.hbs');
+      res.render('cart/thankyou.hbs');
     }
 }
 
