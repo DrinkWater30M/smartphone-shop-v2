@@ -4,7 +4,7 @@ const userController = require('../controllers/UserController');
 const passport = require('../authentication/passport');
 
 /* GET account page. */
-router.post('/account', userController.getAccountPage);
+router.get('/account', userController.getAccountPage);
 
 /* GET login page. */
 router.get('/login', userController.getLoginPage);
