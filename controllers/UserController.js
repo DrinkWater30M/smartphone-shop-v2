@@ -3,17 +3,9 @@ const userService = require('../services/UserService');
 
 class UserController{
     //Return account page
-    async getAccountPage(req, res, next) {
-        //Get user information
-        let user = await userService.getUserInformation(req.body.email);
-
-        res.render(
-            'user/account.hbs',
-            {
-                user:user,
-            }
-        );
-      }
+    getAccountPage(req, res, next) {
+        res.render('user/account.hbs');
+    }
 
     //Return login page
     getLoginPage(req, res, next) {
