@@ -64,6 +64,65 @@ class UserService{
         }
     }
 
+    async addOTP(idUser, otp, expired){
+        try{
+            //Check user in otp,  DB
+            let user = await sequelize.query(
+                `SELECT * FROM otp WHERE otp.MaKhachHang = ${idUser};`,
+                {type: QueryTypes.SELECT}
+            )
+
+            if(user.length == 0){
+                await sequelize.query(
+                    `INSERT INTO otp(MaKhachHang, Otp, HanSuDung) VALUE(${idUser}, '${otp}', '2022-01-07 17:17:00');`
+                )
+            }
+            else{
+                await sequelize.query(
+                    `UPDATE otp SET otp.Otp = '${otp}' WHERE otp.MaKhachHang = ${idUser};`
+                )
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async resetPassword(idUser, password){
+        try{
+            //Hash password
+            let saltRounds = 10;
+            let hash = await bcrypt.hash(password, saltRounds);
+
+            //Update password
+            await sequelize.query(
+                `UPDATE khach_hang SET khach_hang.MatKhau = '${hash}' WHERE khach_hang.MaKhachHang = ${idUser};`
+            )
+
+            //Delete OTP
+            await sequelize.query(
+                `DELETE FROM otp WHERE otp.MaKhachHang = ${idUser};`
+            )
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async getOTP(idUser){
+        try{
+            let otp = await sequelize.query(
+                `SELECT * FROM otp WHERE otp.MaKhachHang = ${idUser}`,
+                {type: QueryTypes.SELECT}
+            )
+
+            return otp[0];
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     // async getWishList(idUser){
     //     try{
     //         let products = await sequelize.query(

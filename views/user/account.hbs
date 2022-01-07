@@ -8,7 +8,7 @@
                     <ul role="tablist" class="nav flex-column dashboard-list">
                         <li> <a href="#orders" data-bs-toggle="tab" class="nav-link active">Đơn hàng</a></li>
                         <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin cá nhân</a>
-                        <li><a href="#address" data-bs-toggle="tab" class="nav-link">Địa chỉ</a></li>
+                        <li><a href="#reset-password" data-bs-toggle="tab" class="nav-link">Đổi mật khẩu</a></li>
                         </li>
                         <li><a href="/user/logout" class="nav-link">Đăng xuất</a></li>
                     </ul>
@@ -68,27 +68,37 @@
                                             <input type="text" name="address" value="">
                                         </div>
                                         <div class="save_button mt-3">
-                                            <button id="save-account-details-btn" class="btn" type="button">Save</button>
+                                            <button id="save-account-details-btn" class="btn" type="button">Lưu</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="address">
-                        <p>Địa chỉ sau đây sẽ được dùng để thanh toán mặc định khi mua hàng!</p>
-                        <h5 class="billing-address">Billing address</h5>
-                        <a href="#" class="view">Edit</a>
-                        <p class="mb-2"><strong>Michael M Hoskins</strong></p>
-                        <address>
-                            <span class="mb-1 d-inline-block"><strong>City:</strong> Seattle</span>,
-                            <br>
-                            <span class="mb-1 d-inline-block"><strong>State:</strong> Washington(WA)</span>,
-                            <br>
-                            <span class="mb-1 d-inline-block"><strong>ZIP:</strong> 98101</span>,
-                            <br>
-                            <span><strong>Country:</strong> USA</span>
-                        </address>
+                    <div class="tab-pane" id="reset-password">
+                          <h3>Thay đổi mật khẩu</h3>
+                            <div class="default-form-box mb-20">
+                                <label>Mã OTP</label>
+                                <div class="d-flex flex-row">
+                                    <input type="text" name="otp">
+                                    <div class="save_button">
+                                        <button id="get-otp-btn" class="btn" type="button">Lấy OTP</button>
+                                    </div>
+                                </div>
+                                <span id="otp-notification" style="font-weight: bold; color:blue;"></span>
+                            </div>
+                            <div class="default-form-box mb-20">
+                                <label>Mật khẩu mới</label>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="default-form-box mb-20">
+                                <label>Xác nhận lại mật khẩu</label>
+                                <input type="password" name="confirm-password">
+                            </div>
+                            <span id="reset-password-notification" style="color: red; font-size: 0.9em;"></span>
+                            <div class="save_button mt-1">
+                                <button id="reset-password-btn" class="btn" type="button">Xác nhận</button>
+                            </div>
                     </div>
                 </div>
             </div>
