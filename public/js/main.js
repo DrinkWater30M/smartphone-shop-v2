@@ -391,7 +391,12 @@
                 newVal = 1;
             }
         }
+        //Update value for input
         $button.parent().find("input").val(newVal);
+
+        //Update value for subTotal
+        let newSubTotal = newVal * $button.parent().parent().parent().find(".product-price-cart .amount").text();
+        $button.parent().parent().parent().find(".product-subtotal").text(newSubTotal);
     });
 
 

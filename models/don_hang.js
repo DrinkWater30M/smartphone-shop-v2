@@ -2,7 +2,8 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('don_hang', {
     MaDonHang: {
-      type: DataTypes.CHAR(10),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
@@ -15,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     MaSanPham: {
-      type: DataTypes.CHAR(10),
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'loai_san_pham',
@@ -23,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     LoaiSanPham: {
-      type: DataTypes.CHAR(10),
+      type: DataTypes.CHAR(25),
       allowNull: false,
       references: {
         model: 'loai_san_pham',
@@ -42,17 +43,29 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
+    HoTen: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
     SoDienThoai: {
       type: DataTypes.CHAR(10),
+      allowNull: false
+    },
+    Email: {
+      type: DataTypes.STRING(100),
       allowNull: false
     },
     DiaChiGiaoHang: {
       type: DataTypes.TEXT,
       allowNull: false
     },
-    TrangThaiGiaoHang: {
-      type: DataTypes.BOOLEAN,
+    TrangThaiDonHang: {
+      type: DataTypes.INTEGER,
       allowNull: false
+    },
+    LuuYCuaNguoiMua: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,

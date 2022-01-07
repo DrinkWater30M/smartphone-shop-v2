@@ -2,12 +2,13 @@ const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('hinh_anh_san_pham', {
     MaHinhAnh: {
-      type: DataTypes.CHAR(10),
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
     MaSanPham: {
-      type: DataTypes.CHAR(10),
+      type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: 'san_pham',

@@ -5,7 +5,7 @@ const passport = require('../authentication/passport');
 const middleware = require('../middleware/MiddleWare');
 
 /* GET account page. */
-router.post('/account', middleware.isLogin, userController.getAccountPage);
+router.get('/account', middleware.isLogin, userController.getAccountPage);
 
 /* GET login page. */
 router.get('/login', userController.getLoginPage);

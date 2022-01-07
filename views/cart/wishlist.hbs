@@ -1,7 +1,11 @@
 <!-- Wishlist Area Start -->
 <div class="cart-main-area pt-100px pb-100px">
     <div class="container">
+        {{#if products}}
         <h3 class="cart-page-title">Giỏ yêu thích</h3>
+        {{else}}
+        <h3 class="cart-page-title">Giỏ yêu thích(Chưa có sản phẩm nào!)</h3>
+        {{/if}}
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                 <form action="#">
@@ -11,61 +15,31 @@
                                 <tr>
                                     <th>Hình Ảnh</th>
                                     <th>Tên Sản Phẩm</th>
-                                    <th>Đơn Giá</th>
-                                    <th>Số Lượng</th>
-                                    <th>Thành Tiền</th>
-                                    <th>Thêm Vào Giỏ Hàng</th>
+                                    <th>Loại Sản Phẩm</th>
+                                    <th>Đơn Giá(vnđ)</th>
+                                    <th>Giỏ hàng</th>
+                                    <th>Xóa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                {{#each products}}
+                                <tr class="single-product">
+                                    <input type="hidden" name="idProduct" value="{{MaSanPham}}">
+                                    <input type="hidden" name="idCategory" value="{{LoaiSanPham}}">
                                     <td class="product-thumbnail">
-                                        <a href="/products/detail"><img class="img-responsive ml-15px" src="/images/product-image/product.jpg" alt="" /></a>
+                                        <a href="/products/detail?id={{MaSanPham}}"><img class="img-responsive ml-15px" src={{HinhAnh}} alt="product image" /></a>
                                     </td>
-                                    <td class="product-name"><a href="/products/detail">Modern Smart Phone</a></td>
-                                    <td class="product-price-cart"><span class="amount">$60.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$70.00</td>
+                                    <td class="product-name"><a href="/products/detail?id={{MaSanPham}}">{{TenSanPham}}</a></td>
+                                    <td class="product-category">{{TenLoaiSanPham}}</td>
+                                    <td class="product-price-cart"><span class="amount">{{DonGia}}</span></td>
                                     <td class="product-wishlist-cart">
-                                        <a href="#">Thêm</a>
+                                        <a href="javascript:{}" class="add-to-cart">Thêm</a>
+                                    </td>
+                                    <td class="product-remove">
+                                        <a href="javascript:{}" class="remove"><i class="fa fa-times"></i></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="/products/detail"><img class="img-responsive ml-15px" src="/images/product-image/product.jpg" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="/products/detail">Bluetooth Headphone</a></td>
-                                    <td class="product-price-cart"><span class="amount">$50.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$80.00</td>
-                                    <td class="product-wishlist-cart">
-                                        <a href="#">Thêm</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="/products/detail"><img class="img-responsive ml-15px" src="/images/product-image/product.jpg" alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="/products/detail">Smart Music Box</a></td>
-                                    <td class="product-price-cart"><span class="amount">$70.00</span></td>
-                                    <td class="product-quantity">
-                                        <div class="cart-plus-minus">
-                                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
-                                        </div>
-                                    </td>
-                                    <td class="product-subtotal">$90.00</td>
-                                    <td class="product-wishlist-cart">
-                                        <a href="#">Thêm</a>
-                                    </td>
-                                </tr>
+                                {{/each}}
                             </tbody>
                         </table>
                     </div>
@@ -75,3 +49,5 @@
     </div>
 </div>
 <!-- Wishlist Area End -->
+{{!-- Handle for wishlist --}}
+<script src="/js/wishlist-handler.js" defer></script>

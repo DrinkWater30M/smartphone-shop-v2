@@ -82,24 +82,30 @@
                         </div>
                         <div class="col-lg-3 col">
                             <div class="header-actions">
+                                {{#if user}}
                                 <!-- Single Wedge Start -->
                                 <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
                                     <i class="pe-7s-like"></i>
-                                    {{#if user}}
-                                    <span class="header-action-num">10</span>
-                                    {{else}}
-                                    <span class="header-action-num">0</span>
-                                    {{/if}}
+                                    <span class="header-action-num">$</span>
                                 </a>
+                                {{else}}
+                                <!-- Single Wedge Start -->
+                                <a href="/user/login" class="header-action-btn">
+                                    <i class="pe-7s-like"></i>
+                                </a>
+                                {{/if}}
+                                {{#if user}}
                                 <!-- Single Wedge End -->
                                 <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                     <i class="pe-7s-shopbag"></i>
-                                    {{#if user}}
-                                    <span class="header-action-num">10</span>
-                                    {{else}}
-                                    <span class="header-action-num">0</span>
-                                    {{/if}}
+                                    <span class="header-action-num">$</span>
                                 </a>
+                                {{else}}
+                                <!-- Single Wedge End -->
+                                <a href="/user/login" class="header-action-btn header-action-btn-cart pr-0">
+                                    <i class="pe-7s-shopbag"></i>
+                                </a>
+                                {{/if}}
                                 <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
                                     <i class="pe-7s-menu"></i>
                                 </a>
@@ -128,25 +134,30 @@
                         </div>
                         <div class="col-lg-3 col">
                             <div class="header-actions">
+                                {{#if user}}
                                 <!-- Single Wedge Start -->
                                 <a href="#offcanvas-wishlist" class="header-action-btn offcanvas-toggle">
                                     <i class="pe-7s-like"></i>
-                                    {{#if user}}
-                                    <span class="header-action-num">10</span>
-                                    {{else}}
-                                    <span class="header-action-num">0</span>
-                                    {{/if}}
+                                    <span class="header-action-num">$</span>
                                 </a>
+                                {{else}}
+                                <!-- Single Wedge Start -->
+                                <a href="/user/login" class="header-action-btn">
+                                    <i class="pe-7s-like"></i>
+                                </a>
+                                {{/if}}
+                                {{#if user}}
                                 <!-- Single Wedge End -->
                                 <a href="#offcanvas-cart" class="header-action-btn header-action-btn-cart offcanvas-toggle pr-0">
                                     <i class="pe-7s-shopbag"></i>
-                                    {{#if user}}
-                                    <span class="header-action-num">10</span>
-                                    {{else}}
-                                    <span class="header-action-num">0</span>
-                                    {{/if}}
-                                    <!-- <span class="cart-amount">€30.00</span> -->
+                                    <span class="header-action-num">$</span>
                                 </a>
+                                {{else}}
+                                <!-- Single Wedge End -->
+                                <a href="/user/login" class="header-action-btn header-action-btn-cart pr-0">
+                                    <i class="pe-7s-shopbag"></i>
+                                </a>
+                                {{/if}}
                                 <a href="#offcanvas-mobile-menu" class="header-action-btn header-action-btn-menu offcanvas-toggle d-lg-none">
                                     <i class="pe-7s-menu"></i>
                                 </a>
@@ -276,30 +287,16 @@
                 </div>
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
+                        {{!-- Template for product in menu
                         <li>
                             <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
                             <div class="content">
                                 <a href="/products/detail" class="title">Modern Smart Phone</a>
-                                <span class="quantity-price">1 x <span class="amount">$21.86</span></span>
+                                <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
-                        </li>
-                        <li>
-                            <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="/products/detail" class="title">Bluetooth Headphone</a>
-                                <span class="quantity-price">1 x <span class="amount">$13.28</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="/products/detail" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$17.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
+                        </li> 
+                        --}}
                     </ul>
                 </div>
                 <div class="foot">
@@ -319,6 +316,7 @@
                 </div>
                 <div class="body customScroll">
                     <ul class="minicart-product-list">
+                        {{!-- Template for product in menu
                         <li>
                             <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
                             <div class="content">
@@ -326,23 +324,8 @@
                                 <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
                                 <a href="#" class="remove">×</a>
                             </div>
-                        </li>
-                        <li>
-                            <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="/products/detail" class="title">Bluetooth Headphone</a>
-                                <span class="quantity-price">1 x <span class="amount">$43.28</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="/products/detail" class="image"><img src="/images/product-image/product.jpg" alt="Cart product Image"></a>
-                            <div class="content">
-                                <a href="/products/detail" class="title">Smart Music Box</a>
-                                <span class="quantity-price">1 x <span class="amount">$37.34</span></span>
-                                <a href="#" class="remove">×</a>
-                            </div>
-                        </li>
+                        </li> 
+                        --}}
                     </ul>
                 </div>
                 <div class="foot">
@@ -361,7 +344,7 @@
                 <ul>
                     <li><a href="tel:0123456789"><i class="fa fa-phone"></i> +84000000000</a></li>
                     <li><a href="mailto:demo@example.com"><i class="fa fa-envelope-o"></i> demo@example.com</a></li>
-                    <li><a href="my-account.html"><i class="fa fa-user"></i> Tài khoản</a></li>
+                    <li><a href="/user/account"><i class="fa fa-user"></i> Tài khoản</a></li>
                 </ul>
             </div>
             <div class="inner customScroll">
@@ -492,19 +475,19 @@
                                     </p>
                                     <ul class="link-follow">
                                         <li>
-                                            <a class="m-0" title="Twitter" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-facebook"
+                                            <a class="m-0" title="Facebook" target="_blank" rel="noopener noreferrer" href="https://vi-vn.facebook.com/"><i class="fa fa-facebook"
                                                 aria-hidden="true"></i></a>
                                         </li>
                                         <li>
-                                            <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-tumblr" aria-hidden="true"></i>
+                                            <a title="Tumblr" target="_blank" rel="noopener noreferrer" href="https://www.tumblr.com/"><i class="fa fa-tumblr" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a title="Facebook" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-twitter" aria-hidden="true"></i>
+                                            <a title="Twitter" target="_blank" rel="noopener noreferrer" href="https://twitter.com/?lang=vi"><i class="fa fa-twitter" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a title="Instagram" target="_blank" rel="noopener noreferrer" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
+                                            <a title="Instagram" target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                     </ul>

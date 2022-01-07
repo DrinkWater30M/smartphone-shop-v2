@@ -3,8 +3,15 @@ const userService = require('../services/UserService');
 
 class UserController{
     //Return account page
-    getAccountPage(req, res, next) {
-        res.render('user/account.hbs');
+    async getAccountPage(req, res, next) {
+        try{
+            //Return account page, data in this page will call ajax
+            res.render('user/account.hbs');
+        }
+        catch(error){
+            console.log(error);
+            res.status(500);
+        }
     }
 
     //Return login page
@@ -33,7 +40,7 @@ class UserController{
         let user = {Email: email, Password: password};
 
         //Register information user to database
-        let statusRegister = await userService.registerAccount(use.Email, user.Password, req);
+        let statusRegister = await userService.registerAccount(user.Email, user.Password, req);
 
         if(statusRegister){
             //Auto login and redirect
