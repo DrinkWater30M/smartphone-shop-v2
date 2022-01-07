@@ -12,7 +12,7 @@ const productsRouter = require('./routes/products');
 const cartRouter = require('./routes/cart');
 const userRouter = require('./routes/user');
 const informationRouter = require('./routes/information');
-const api = require('./routes/api');
+const api = require('./api/api');
 const middleware = require('./middleware/MiddleWare');
 
 const app = express();

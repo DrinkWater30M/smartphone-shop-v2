@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     MaSanPham: {
-      type: DataTypes.CHAR(10),
+      type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'san_pham',

@@ -1,7 +1,7 @@
 'use strict'
 const productsService = require('../services/ProductsService');
 
-class ApiController{
+class ApiProductsController{
     async getSomeRating(req, res, next) {
         const countRating = 10;
         const offset = 2 + req.query.ratingPage*countRating;
@@ -32,4 +32,4 @@ class ApiController{
 }
 
 
-module.exports = new ApiController;
+module.exports = new ApiProductsController;

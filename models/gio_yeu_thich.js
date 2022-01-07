@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('gio_hang', {
+  return sequelize.define('gio_yeu_thich', {
     MaKhachHang: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -27,14 +27,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'loai_san_pham',
         key: 'LoaiSanPham'
       }
-    },
-    SoLuongMua: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'gio_hang',
+    tableName: 'gio_yeu_thich',
     timestamps: false,
     indexes: [
       {
@@ -48,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "FK_GIO_HANG_SANPHAM",
+        name: "FK_GIO_YEU_THICH_SANPHAM",
         using: "BTREE",
         fields: [
           { name: "MaSanPham" },
