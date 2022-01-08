@@ -100,61 +100,36 @@ function main(){
         })
     })
 
-    //Call ajax when click get otp btn
-    let otpBtn = document.getElementById('get-otp-btn');
-    otpBtn.addEventListener('click', ()=>{
-        let otpNotification = $('#otp-notification');
-        $.ajax({
-            url:'/api/user/reset-password/otp',
-            type: 'POST',
-            beforeSend: function(){
-                otpNotification.html('Đang thực hiện gửi OTP... Vui lòng chờ!');
-            },
-            success: function(res){
-                //Notification
-                otpNotification.html(res.message);
-            },
-            error:function(xhr, status, error){
-                console.log(error);
-
-                let message = "Đã có lỗi gì đó! Vui lòng thử lại!";
-
-                if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
-
-                otpNotification.html(message);
-            }
-        })
-    })
-
     //Call ajax when click reset password
     let resetPasswordBtn = document.getElementById('reset-password-btn');
     resetPasswordBtn.addEventListener('click', ()=>{
         //Validate input
         let resetPasswordNotification = document.getElementById('reset-password-notification');
-        let otp = document.querySelector('#reset-password input[name="otp"]');
-        if(!otp.value){
-            resetPasswordNotification.innerText = 'OTP không được để trống!';
+        let oldPassword = document.querySelector('#reset-password input[name="old-password"]');
+        if(!oldPassword.value){
+            resetPasswordNotification.innerText = 'Mật khẩu cũ không được để trống!';
             return
         }
 
-        let password = document.querySelector('#reset-password input[name="password"]');
-        if(!password.value || password.value.length < 8){
-            resetPasswordNotification.innerText = 'Mật khẩu phải từ 8 kí tự trở lên!';
+        let newPassword = document.querySelector('#reset-password input[name="new-password"]');
+        if(!newPassword.value || newPassword.value.length < 8){
+            resetPasswordNotification.innerText = 'Mật khẩu mới phải từ 8 kí tự trở lên!';
             return
         }
 
         let confirmPassword = document.querySelector('#reset-password input[name="confirm-password"]');
-        if(!confirmPassword.value || confirmPassword.value != password.value){
+        if(!confirmPassword.value || confirmPassword.value != newPassword.value){
             resetPasswordNotification.innerText = 'Xác nhận mật khẩu không chính xác!';
             return
         }
 
         //Call ajax
         $.ajax({
-            url:'/api/user/reset-password/reset',
+            url:'/api/user/reset-password/update',
             type: 'PATCH',
-            data: {otp: otp.value, password: password.value},
+            data: {oldPassword: oldPassword.value, newPassword: newPassword.value},
             beforeSend: function(){
+                resetPasswordNotification.style.color = 'blue';
                 resetPasswordNotification.innerText = 'Đang xử lí!...';
             },
             success: function(res){
@@ -170,6 +145,7 @@ function main(){
 
                 if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
 
+                resetPasswordNotification.style.color = 'red';
                 resetPasswordNotification.innerText = message;
             }
         })

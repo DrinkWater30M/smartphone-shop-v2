@@ -25,4 +25,8 @@ router.post('/register', userController.register);
 /* Log out page. */
 router.get('/logout', middleware.isLogin, userController.logout);
 
+
+/* GET reset password page. */
+router.get('/reset-password', userController.getResetPasswordPage);
+
 module.exports = router;
