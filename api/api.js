@@ -45,8 +45,9 @@ router.get('/user/account', middleware.isLogin, apiUserController.getAccount);
 router.post('/user/account-save', middleware.isLogin, apiUserController.saveAccount);
 
 /*Add otp and send to email*/
-router.post('/user/reset-password/otp', middleware.isLogin, apiUserController.addOTP);
+router.post('/user/reset-password/otp', apiUserController.addOTP);
 
-/*Update password*/
-router.patch('/user/reset-password/reset', middleware.isLogin, apiUserController.resetPassword);
+/*Reset password*/
+router.patch('/user/reset-password/reset', apiUserController.resetPassword);
+
 module.exports = router;

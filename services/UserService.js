@@ -21,6 +21,22 @@ class UserService{
 
     }
 
+    async getIdUser(email){
+        try{
+            let user  = await sequelize.query(
+                `SELECT khach_hang.MaKhachHang FROM khach_hang WHERE khach_hang.Email = '${email}'`,
+                {type: QueryTypes.SELECT}
+            );
+
+            if(!user[0]) { return undefined;}
+
+            return user[0].MaKhachHang;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     async registerAccount(email, password, req){
         let user = await models.khach_hang.findOne({ where: {Email: email}, raw: true,});
         

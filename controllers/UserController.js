@@ -62,6 +62,11 @@ class UserController{
             );
         }
     }
+
+    //Return reset password page
+    getResetPasswordPage(req, res, next){
+        res.render('user/reset-password.hbs');
+    }
 }
 
 module.exports = new UserController

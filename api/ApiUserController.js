@@ -53,7 +53,15 @@ class ApiUserController{
     async addOTP(req, res, next){
         try{
             //Get id user
-            let idUser = req.user.MaKhachHang;
+            let email = req.body.email;
+
+            //Check account use email
+            let idUser =  await userService.getIdUser(email);
+
+            if(!idUser){
+                res.status(422).json({error: 'Email chưa được đăng kí!'});
+                return;
+            }
 
             //Generate otp, 6 digits
             const otp = crypto.randomInt(100000, 999999).toString();
@@ -64,7 +72,7 @@ class ApiUserController{
             //Send OTP to email for user
             await transporter.sendMail({
                 from: `"Smartphone Shop" <${process.env.NODEMAILER_USERNAME}>`,
-                to: req.user.Email,
+                to: email,
                 subject: "Smartphone Shop - Thay đổi mật khẩu",
                 text: "Chào bạn! Đây là mã OTP để thay đổi mật khẩu. Tuyệt đối không cung cấp cho bất kì ai!",
                 html:   `<p>Chào bạn! Đây là mã OTP để thay đổi mật khẩu. Tuyệt đối không cung cấp cho bất kì ai!
@@ -84,12 +92,18 @@ class ApiUserController{
     async resetPassword(req, res, next){
         try{
             //Get id user to get info
-            let idUser = req.user.MaKhachHang;
-            let {otp, password} = req.body;
+            let {email, otp, password} = req.body;
+
+            //Check email
+            let idUser = await userService.getIdUser(email);
+            if(!idUser){
+                res.status(422).json({error: 'Email chưa được đăng kí!'});
+                return;
+            }
 
             //Check otp before reset
             let otpUser = await userService.getOTP(idUser);
-            if(otp != otpUser.Otp){
+            if(!otpUser || otp != otpUser.Otp){
                 res.status(402).json({error: "OTP hết hạn hoặc không chính xác!"});
                 return;
             }
@@ -98,7 +112,7 @@ class ApiUserController{
             await userService.resetPassword(idUser, password);
 
             //Return data
-            res.status(200).json({message: 'Đổi thành công!', redirectUrl: '/'});
+            res.status(200).json({message: 'Đổi thành công!', redirectUrl: '/user/login'});
         }
         catch(error){
             console.log(error);
