@@ -50,4 +50,7 @@ router.post('/user/reset-password/otp', apiUserController.addOTP);
 /*Reset password*/
 router.patch('/user/reset-password/reset', apiUserController.resetPassword);
 
+/*Update password*/
+router.patch('/user/reset-password/update', middleware.isLogin, apiUserController.updatePassword);
+
 module.exports = router;

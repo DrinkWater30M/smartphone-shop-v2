@@ -73,6 +73,7 @@ function main(){
             type: 'PATCH',
             data: {email: email.value, otp: otp.value, password: password.value},
             beforeSend: function(){
+                resetPasswordNotification.style.color = 'blue';
                 resetPasswordNotification.innerText = 'Đang xử lí!...';
             },
             success: function(res){
@@ -88,6 +89,7 @@ function main(){
 
                 if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
 
+                resetPasswordNotification.style.color = 'red';
                 resetPasswordNotification.innerText = message;
             }
         })

@@ -2,6 +2,7 @@
 const userService = require('../services/UserService');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
@@ -103,7 +104,7 @@ class ApiUserController{
 
             //Check otp before reset
             let otpUser = await userService.getOTP(idUser);
-            if(!otpUser || otp != otpUser.Otp){
+            if(otp != otpUser){
                 res.status(402).json({error: "OTP hết hạn hoặc không chính xác!"});
                 return;
             }
@@ -113,6 +114,32 @@ class ApiUserController{
 
             //Return data
             res.status(200).json({message: 'Đổi thành công!', redirectUrl: '/user/login'});
+        }
+        catch(error){
+            console.log(error);
+            res.status(500).send({error: "Đã có lỗi trên server! Vui lòng thử lại!"});
+        }
+    }
+
+    async updatePassword(req, res, next){
+        try{
+            //Get id user to get info
+            let idUser = req.user.MaKhachHang;
+            let {oldPassword, newPassword} = req.body;
+
+            //Check old password
+            let oldPasswordUser = await userService.getPassword(idUser);
+            let match = await bcrypt.compare(oldPassword, oldPasswordUser);
+            if(!match){
+                res.status(422).json({error: 'Mật khẩu cũ không chính xác!'});
+                return;
+            }
+
+            //Reset password
+            await userService.resetPassword(idUser, newPassword);
+
+            //Return data
+            res.status(200).json({message: 'Đổi thành công!', redirectUrl: '/'});
         }
         catch(error){
             console.log(error);

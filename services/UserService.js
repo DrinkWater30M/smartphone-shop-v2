@@ -104,6 +104,35 @@ class UserService{
         }
     }
 
+    async getOTP(idUser){
+        try{
+            let otp = await sequelize.query(
+                `SELECT * FROM otp WHERE otp.MaKhachHang = ${idUser}`,
+                {type: QueryTypes.SELECT}
+            )
+
+            if(!otp[0]){ return undefined;}
+            return otp[0].Otp;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
+    async getPassword(idUser){
+        try{
+            let user = await sequelize.query(
+                `SELECT * FROM khach_hang WHERE khach_hang.MaKhachHang = ${idUser}`,
+                {type: QueryTypes.SELECT}
+            )
+
+            return user[0].MatKhau;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     async resetPassword(idUser, password){
         try{
             //Hash password
@@ -119,20 +148,6 @@ class UserService{
             await sequelize.query(
                 `DELETE FROM otp WHERE otp.MaKhachHang = ${idUser};`
             )
-        }
-        catch(error){
-            console.log(error);
-        }
-    }
-
-    async getOTP(idUser){
-        try{
-            let otp = await sequelize.query(
-                `SELECT * FROM otp WHERE otp.MaKhachHang = ${idUser}`,
-                {type: QueryTypes.SELECT}
-            )
-
-            return otp[0];
         }
         catch(error){
             console.log(error);
