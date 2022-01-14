@@ -26,6 +26,11 @@ module.exports = function(sequelize, DataTypes) {
     DiaChiGiaoHang: {
       type: DataTypes.TEXT,
       allowNull: true
+    },
+    XacMinhTaiKhoan: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0
     }
   }, {
     sequelize,

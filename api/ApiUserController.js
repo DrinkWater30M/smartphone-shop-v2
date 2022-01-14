@@ -74,9 +74,8 @@ class ApiUserController{
             await transporter.sendMail({
                 from: `"Smartphone Shop" <${process.env.NODEMAILER_USERNAME}>`,
                 to: email,
-                subject: "Smartphone Shop - Thay đổi mật khẩu",
-                text: "Chào bạn! Đây là mã OTP để thay đổi mật khẩu. Tuyệt đối không cung cấp cho bất kì ai!",
-                html:   `<p>Chào bạn! Đây là mã OTP để thay đổi mật khẩu. Tuyệt đối không cung cấp cho bất kì ai!
+                subject: "Smartphone Shop - Mã OTP",
+                html:   `<p>Chào bạn! Đây là mã OTP được gửi từ tài khoản của bạn. Tuyệt đối không cung cấp cho bất kì ai!
                         <br><br>Chúc bạn một ngày làm việc tốt lành!</p>
                         <b style="font-size: 3em;">${otp}</b>`,
             });
@@ -140,6 +139,31 @@ class ApiUserController{
 
             //Return data
             res.status(200).json({message: 'Đổi thành công!', redirectUrl: '/'});
+        }
+        catch(error){
+            console.log(error);
+            res.status(500).send({error: "Đã có lỗi trên server! Vui lòng thử lại!"});
+        }
+    }
+
+    async verifyAccount(req, res, next){
+        try{
+            //Get id and otp
+            let idUser = req.user.MaKhachHang;
+            let otp = req.body.otp;
+            
+            //Check otp before reset
+            let otpUser = await userService.getOTP(idUser);
+            if(otp != otpUser){
+                res.status(402).json({error: "OTP hết hạn hoặc không chính xác!"});
+                return;
+            }
+
+            //Update status of account
+            await userService.updateStatusAccount(idUser);
+
+            //Return message
+            res.status(200).json({message: "Xác minh thành công!"});
         }
         catch(error){
             console.log(error);

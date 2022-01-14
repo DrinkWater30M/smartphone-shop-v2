@@ -8,7 +8,7 @@ class UserService{
         try{
             let user  = await sequelize.query(
                 `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, khach_hang.Email, 
-                    khach_hang.SoDienThoai, khach_hang.DiaChiGiaoHang
+                    khach_hang.SoDienThoai, khach_hang.DiaChiGiaoHang, khach_hang.XacMinhTaiKhoan
                 FROM khach_hang WHERE khach_hang.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT}
             );
@@ -67,13 +67,31 @@ class UserService{
 
     async updateAccount(idUser, userInfo){
         try{
+            //Update
             await sequelize.query(
                 `UPDATE khach_hang
                 SET khach_hang.HoTen = '${userInfo.name}', khach_hang.Email = '${userInfo.email}', 
                 khach_hang.SoDienThoai = '${userInfo.phone}', khach_hang.DiaChiGiaoHang ='${userInfo.address}'
                 WHERE khach_hang.MaKhachHang = ${idUser};`
             )
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
 
+    async updateStatusAccount(idUser){
+        try{
+            await sequelize.query(
+                `UPDATE khach_hang
+                SET khach_hang.XacMinhTaiKhoan = 1
+                WHERE khach_hang.MaKhachHang = ${idUser};`
+            )
+
+            //Delete OTP
+            await sequelize.query(
+                `DELETE FROM otp WHERE otp.MaKhachHang = ${idUser};`
+            )
         }
         catch(error){
             console.log(error);
