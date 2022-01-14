@@ -19,7 +19,7 @@ function htmlBills(bills){
 }
 
 function main(){
-    //Call ajax when click information bill
+    //Call ajax when click information bill tab
     let orderDetail = document.querySelector('a[href="#orders"]');
     orderDetail.addEventListener('click', ()=>{
         $.ajax({
@@ -44,7 +44,7 @@ function main(){
         })
     })
 
-    //Call ajax when click information account
+    //Call ajax when click information account tab
     let accoutDetail = document.querySelector('a[href="#account-details"]');
     accoutDetail.addEventListener('click', ()=>{
         $.ajax({
@@ -98,6 +98,108 @@ function main(){
                 alert(message);
             }
         })
+    })
+
+    //Call ajax when click verify account tab
+    let verifyAcccount = document.querySelector('a[href="#email-verification"]');
+    verifyAcccount.addEventListener('click', ()=>{
+    let emailVerification = document.getElementById('email-verification');
+        $.ajax({
+            url:'/api/user/account',
+            type: 'GET',
+            success: function(res){
+                if(res.XacMinhTaiKhoan == 1){
+                    emailVerification.querySelector('.login_form_container').remove();
+                    emailVerification.querySelector('h3').append("(Đã xác minh)");
+                }
+            },
+            error:function(xhr, status, error){
+                console.log(error);
+
+                let message = "Đã có lỗi gì đó! Vui lòng thử lại!";
+
+                if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
+
+                alert(message);
+            }
+        })
+    })
+
+    //Call ajax when get otp to verify account
+    let otpBtn = document.getElementById('get-otp-btn');
+    otpBtn.addEventListener('click', ()=>{
+        let otpNotification = $('#otp-notification');
+        let email = document.querySelector('#email-verification input[name="email"]');
+        let data = {email: email.value};
+
+        $.ajax({
+            url:'/api/user/verify-account/otp',
+            type: 'POST',
+            data: data,
+            beforeSend: function(){
+                otpNotification.css('color','blue');
+                otpNotification.html('Đang thực hiện gửi OTP... Vui lòng chờ!');
+            },
+            success: function(res){
+                //Notification
+                otpNotification.css('color', 'blue');
+                otpNotification.html(res.message);
+            },
+            error:function(xhr, status, error){
+                console.log(error);
+
+                let message = "Đã có lỗi gì đó! Vui lòng thử lại!";
+
+                if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
+
+                otpNotification.css('color', 'red');
+                otpNotification.html(message);
+            }
+        })
+    })
+
+    //Call ajax when click verify account btn
+    let verifyEmailBtn = document.getElementById('verify-email-btn');
+    verifyEmailBtn.addEventListener('click', ()=>{
+        //Check otp is not empty
+        let emailVerification = document.getElementById('email-verification');
+        let otp = document.querySelector('#email-verification input[name="otp"]');
+        let verifyAccountNotification = document.getElementById('verify-account-notification');
+
+        if(!otp.value){
+            verifyAccountNotification.innerText = "OTP đang trống!";
+        }
+        else{
+            //Call ajax
+            $.ajax({
+                url:'/api/user/verify-account/verify',
+                type: 'PATCH',
+                data: {otp: otp.value},
+                beforeSend: function(){
+                    verifyAccountNotification.style.color = 'blue';
+                    verifyAccountNotification.innerText = 'Đang xử lí!...';
+                },
+                success: function(res){
+                    //Notification
+                    verifyAccountNotification.innerText = '';
+                    alert(res.message);
+
+                    //Change UI
+                    emailVerification.querySelector('.login_form_container').remove();
+                    emailVerification.querySelector('h3').append("(Đã xác minh)");
+                },
+                error:function(xhr, status, error){
+                    console.log(error);
+
+                    let message = "Đã có lỗi gì đó! Vui lòng thử lại!";
+
+                    if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
+
+                    verifyAccountNotification.style.color = 'red';
+                    verifyAccountNotification.innerText = message;
+                }
+            })
+        }
     })
 
     //Call ajax when click reset password

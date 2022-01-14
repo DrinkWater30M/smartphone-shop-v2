@@ -53,4 +53,10 @@ router.patch('/user/reset-password/reset', apiUserController.resetPassword);
 /*Update password*/
 router.patch('/user/reset-password/update', middleware.isLogin, apiUserController.updatePassword);
 
+/*verify account*/
+router.post('/user/verify-account/otp', middleware.isLogin, apiUserController.addOTP);
+
+/*Update status account*/
+router.patch('/user/verify-account/verify', middleware.isLogin, apiUserController.verifyAccount);
+
 module.exports = router;
