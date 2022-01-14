@@ -6,57 +6,111 @@ const { QueryTypes } = require('sequelize/dist/lib/sequelize');
 const {sequelize, models} = require('../models/index');
 
 class ProductsService{
-    getProductsList(itemsPerPage, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
-    {
-        let filterBrand = currentBrand ? {MaThuongHieu: currentBrand} : {};
-        let fitlerTypeProducts = {};
-        if(currentColor){ fitlerTypeProducts.MauSac = currentColor};
-        if(currentRam){ fitlerTypeProducts.Ram = currentRam};
-        if(currentRom){ fitlerTypeProducts.Rom = currentRom};
-        if(currentMinPrice && currentMaxPrice){fitlerTypeProducts.DonGia = {[Op.between]: [currentMinPrice, currentMaxPrice]}};
+    // getProductsList(itemsPerPage, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
+    // {
+    //     let filterBrand = currentBrand ? {MaThuongHieu: currentBrand} : {};
+    //     let fitlerTypeProducts = {};
+    //     if(currentColor){ fitlerTypeProducts.MauSac = currentColor};
+    //     if(currentRam){ fitlerTypeProducts.Ram = currentRam};
+    //     if(currentRom){ fitlerTypeProducts.Rom = currentRom};
+    //     if(currentMinPrice && currentMaxPrice){fitlerTypeProducts.DonGia = {[Op.between]: [currentMinPrice, currentMaxPrice]}};
 
-        let typeSort = [
-            [], 
-            [['TenSanPham', 'ASC']], 
-            [['TenSanPham', 'DESC']],
-            [[{model: models.loai_san_pham, as: 'loai_san_phams'},'DonGia', 'DESC']],
-        ]
+    //     let typeSort = [
+    //         [], 
+    //         [['TenSanPham', 'ASC']], 
+    //         [['TenSanPham', 'DESC']],
+    //         [[{model: models.loai_san_pham, as: 'loai_san_phams'},'DonGia', 'DESC']],
+    //     ]
 
-        return models.san_pham.findAll(
-            {
-                include: [
-                    {
-                        model: models.hinh_anh_san_pham,
-                        as: 'hinh_anh_san_phams',
-                        attributes: ['HinhAnh']
-                    },
-                    {
-                        model: models.thuong_hieu,
-                        as: 'MaThuongHieu_thuong_hieu',
-                        attributes:['ThuongHieu']
-                    },
-                    {
-                       model: models.loai_san_pham,
-                       as: 'loai_san_phams',
-                       attributes: ['DonGia', 'MauSac', 'Ram', 'Rom'],  
-                       where: fitlerTypeProducts,
-                    }
-                ],
+    //     return models.san_pham.findAll(
+    //         {
+    //             include: [
+    //                 {
+    //                     model: models.hinh_anh_san_pham,
+    //                     as: 'hinh_anh_san_phams',
+    //                     attributes: ['HinhAnh']
+    //                 },
+    //                 {
+    //                     model: models.thuong_hieu,
+    //                     as: 'MaThuongHieu_thuong_hieu',
+    //                     attributes:['ThuongHieu']
+    //                 },
+    //                 {
+    //                    model: models.loai_san_pham,
+    //                    as: 'loai_san_phams',
+    //                    attributes: ['DonGia', 'MauSac', 'Ram', 'Rom'],  
+    //                    where: fitlerTypeProducts,
+    //                 }
+    //             ],
                 
-                order: typeSort[currentSort],
-                where: filterBrand,
-                raw: true,
-                offset: (currentPage-1)*itemsPerPage,
-                limit: itemsPerPage,
-            }
-        )
-        .then( (data) => {
-            //Get first item of each products
-            data = Object.values(data).filter((item,i,a)=>a.findIndex(t=>(t.MaSanPham === item.MaSanPham))===i);
-            return data;
-        })
-    }
+    //             order: typeSort[currentSort],
+    //             where: filterBrand,
+    //             raw: true,
+    //             offset: (currentPage-1)*itemsPerPage,
+    //             limit: itemsPerPage,
+    //         }
+    //     )
+    //     .then( (data) => {
+    //         //Get first item of each products
+    //         data = Object.values(data).filter((item,i,a)=>a.findIndex(t=>(t.MaSanPham === item.MaSanPham))===i);
+    //         return data;
+    //     })
+    // }
 
+    async getProductsList(itemsPerPage, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
+    {
+        try{
+            //Create condition filter
+            let filterBrand = currentBrand ? `AND thuong_hieu.MaThuongHieu = '${currentBrand}'` : "";
+            let filterColor = currentColor ? `AND loai_san_pham.MauSac = '${currentColor}'` : "";
+            let filterRam = currentRam ? `AND loai_san_pham.Ram = ${currentRam}` : "";
+            let filterRom = currentRom ? `AND loai_san_pham.Rom = ${currentRom}` : "";
+            let filterPrice = (currentMinPrice && currentMaxPrice) ? 
+                `AND loai_san_pham.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice}` : "";
+            let filter = "";
+            if(filterBrand || filterColor || filterRam ||filterRom || filterPrice){
+                filter = "WHERE " + filterBrand + filterColor + filterRam + filterRom + filterPrice;
+
+                //Remove string " AND" in near string "WHERE"
+                filter = filter.replace("AND ", "");
+            }
+
+            //Create condition sort
+            let typeSort = [
+                "",
+                "san_pham.TenSanPham ASC",
+                "san_pham.TenSanPham DESC",
+                "loai_san_pham.DonGia ASC",
+                "loai_san_pham.DonGia DESC",
+            ]
+            let sort = currentSort ? `ORDER BY ${typeSort[currentSort]}` : "";
+            console.log(filter, sort)
+
+            //Cal offset
+            let offset = (currentPage - 1) * itemsPerPage;
+
+            //Query
+            let products = await sequelize.query(
+                `SELECT san_pham.MaSanPham, san_pham.TenSanPham, san_pham.MoTa,
+                min(loai_san_pham.DonGia) AS DonGiaNhoNhat, thuong_hieu.ThuongHieu,
+                    (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham
+                        WHERE hinh_anh_san_pham.MaSanPham = san_pham.MaSanPham LIMIT 1) AS HinhAnhDaiDien
+                FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
+                JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
+                ${filter}
+                GROUP BY san_pham.MaSanPham
+                ${sort}
+                LIMIT ${offset}, ${itemsPerPage};`,
+                {type: QueryTypes.SELECT}
+            )
+
+            console.log(products);
+            return products;
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
     
     getBrandsList(){
         return models.thuong_hieu.findAll({
