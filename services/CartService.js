@@ -43,6 +43,29 @@ class CartService{
         }
     }
 
+    async addToWishlist(idUser, idProduct, idCategory){
+        try{
+            //Check wishlist previous
+            let product = await sequelize.query(
+                `SELECT * FROM gio_yeu_thich
+                WHERE gio_yeu_thich.MaKhachHang = ${idUser} AND gio_yeu_thich.MaSanPham = ${idProduct} 
+                    AND gio_yeu_thich.LoaiSanPham = '${idCategory}'`,
+                {type: QueryTypes.SELECT}
+            )
+
+            //If not in wishlist, then product will add
+            if(product.length == 0){
+                await sequelize.query(
+                    `INSERT INTO gio_yeu_thich(MaKhachHang, MaSanPham, LoaiSanPham)
+                        VALUE(${idUser}, ${idProduct}, '${idCategory}');`
+                );
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+
     async addToCart(idUser, idProduct, idCategory, quantityProduct){
         try{
             //Check cart previous

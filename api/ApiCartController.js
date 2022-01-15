@@ -32,6 +32,22 @@ class ApiCartController{
         }
     }
 
+    async addToWishlist(req, res, next){
+        try{
+            //insert data
+            let idUser = req.user.MaKhachHang;
+            let {idProduct, idCategory} = req.body;
+            await cartService.addToWishlist(idUser, idProduct, idCategory);
+
+            //Return result to client
+            res.status(200).json({message: "Thêm thành công!"});
+        }
+        catch(error){
+            console.log(error);
+            res.status(500).send({error: "Đã có lỗi trên server! Vui lòng thử lại!"});
+        }
+    }
+
     async addToCart(req, res, next){
         try{
             //insert data

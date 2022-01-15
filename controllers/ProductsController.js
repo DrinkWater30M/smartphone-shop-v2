@@ -5,7 +5,7 @@ const productsService = require('../services/ProductsService');
 class ProductsController{
     async getProductsListPage(req, res, next) {
         //Amount items per page
-        const ITEMS_PER_PAGE = 12;
+        const ITEMS_PER_PAGE = 9;
 
         //Get page from query
         let currentPage = Number.parseInt(req.query.page) || 1;

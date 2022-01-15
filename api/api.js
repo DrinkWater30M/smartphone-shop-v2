@@ -14,6 +14,9 @@ router.post('/products/detail/add-rating', middleware.isLogin, apiProductsContro
 /* Get products in wishlist*/
 router.get('/wishlist/products', middleware.isLogin, apiCartController.getWishList);
 
+/* Post product to add to wishlist*/
+router.post('/wishlist/add-to-wishlist', middleware.isLogin, apiCartController.addToWishlist);
+
 /* Post product to add to cart*/
 router.post('/wishlist/add-to-cart', middleware.isLogin, apiCartController.addToCart);
 
