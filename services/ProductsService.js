@@ -57,19 +57,25 @@ class ProductsService{
     //     })
     // }
 
-    async getProductsList(itemsPerPage, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
+    async getProductsList(itemsPerPage, currentPage, currentSearch, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort)
     {
         try{
             //Create condition filter
+            let filterSearch = "";
+            if(currentSearch){
+                filterSearch = `AND (san_pham.TenSanPham like '%${currentSearch}%' 
+                    OR loai_san_pham.TenLoaiSanPham like '%${currentSearch}%')`;
+            }
+
             let filterBrand = currentBrand ? `AND thuong_hieu.MaThuongHieu = '${currentBrand}'` : "";
             let filterColor = currentColor ? `AND loai_san_pham.MauSac = '${currentColor}'` : "";
             let filterRam = currentRam ? `AND loai_san_pham.Ram = ${currentRam}` : "";
             let filterRom = currentRom ? `AND loai_san_pham.Rom = ${currentRom}` : "";
             let filterPrice = (currentMinPrice && currentMaxPrice) ? 
-                `AND loai_san_pham.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice}` : "";
+                `AND (loai_san_pham.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice})` : "";
             let filter = "";
-            if(filterBrand || filterColor || filterRam ||filterRom || filterPrice){
-                filter = "WHERE " + filterBrand + filterColor + filterRam + filterRom + filterPrice;
+            if(filterSearch || filterBrand || filterColor || filterRam ||filterRom || filterPrice){
+                filter = "WHERE " + filterSearch + filterBrand + filterColor + filterRam + filterRom + filterPrice;
 
                 //Remove string " AND" in near string "WHERE"
                 filter = filter.replace("AND ", "");

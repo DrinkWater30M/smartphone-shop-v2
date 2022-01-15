@@ -1,5 +1,7 @@
  <!-- Filter products here, use form tag -->
 <form id="products-filter">
+    {{#with currentSearch}}<input type="hidden" name="search" value={{currentSearch}}>{{/with}}
+
     {{#with currentBrand}}<input type="hidden" name="brand" value={{currentBrand}}>{{/with}}
     {{#with currentColor}}<input type="hidden" name="color" value={{currentColor}}>{{/with}}
     {{#with currentRam}}<input type="hidden" name="ram" value={{currentRam}}>{{/with}}
@@ -46,6 +48,16 @@
                         <button data-bs-target="#shop-list" data-bs-toggle="tab">
                             <i class="fa fa-list" aria-hidden="true"></i>
                         </button>
+                    </div>
+                    <div class="col-lg-6 d-lg-block">
+                        <div class="search-element">
+                            <form action="#">
+                                {{#with currentSearch}}
+                                <input class="border border-dark search" type="text" placeholder="Tìm kiếm" value="{{currentSearch}}"/> 
+                                {{/with}}
+                                <button id="search-btn" type="button"><i class="pe-7s-search"></i></button>
+                            </form>
+                        </div>
                     </div>
                     <!-- Right Side Start -->
                     <div class="select-shoing-wrap d-flex align-items-center">
