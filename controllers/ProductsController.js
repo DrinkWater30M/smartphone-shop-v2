@@ -10,6 +10,9 @@ class ProductsController{
         //Get page from query
         let currentPage = Number.parseInt(req.query.page) || 1;
 
+        //Get search from query
+        let currentSearch = req.query.search || null;
+
         //Get brand from query
         let currentBrand = req.query.brand || null;
 
@@ -30,18 +33,16 @@ class ProductsController{
         let currentSort = Number.parseInt(req.query.sort) || 0;
 
         //Get data from DB
-        let productsList = await productsService.getProductsList(ITEMS_PER_PAGE, currentPage, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort);
+        let productsList = await productsService.getProductsList(ITEMS_PER_PAGE, currentPage, currentSearch, currentBrand, currentColor, currentRam, currentRom, currentMinPrice, currentMaxPrice, currentSort);
 
         let brandsList = await productsService.getBrandsList();
-
-        //Get total products
-        let totalProducts = productsList.length;
 
         res.render(
           'products/productsList', 
           {
             productsList: productsList,
             brandsList: brandsList,
+            currentSearch:{currentSearch: currentSearch},
             currentPage:{currentPage: currentPage},
             currentBrand: {currentBrand: currentBrand},
             currentColor: {currentColor: currentColor}, 

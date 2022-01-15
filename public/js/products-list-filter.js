@@ -5,6 +5,7 @@ function main(){
     let rams = document.querySelectorAll('a.filter-ram');
     let roms = document.querySelectorAll('a.filter-rom');
     let sorts = document.querySelectorAll('a.filter-sort');
+    let inputSearch = document.querySelector('#products-filter input[name="search"]');
     let inputBrand = document.querySelector('#products-filter input[name="brand"]');
     let inputColor = document.querySelector('#products-filter input[name="color"]');
     let inputRam = document.querySelector('#products-filter input[name="ram"]');
@@ -15,6 +16,7 @@ function main(){
     let inputSort = document.querySelector('#products-filter input[name="sort"]');
     
     let btnFilterPrices = document.getElementById('filter-prices');
+    let btnSearch = document.getElementById('search-btn');
     let currentTypeSort = document.getElementById('current-type-sort');
     //CSS for current brand
     brands.forEach((brand) => {
@@ -88,7 +90,7 @@ function main(){
         })
     })
 
-    //Event fot btn "Tìm kiếm"
+    //Event fot btn "Tìm kiếm" with price
     btnFilterPrices.addEventListener('click', () => {
         let pricesElement = document.querySelector('.ui-slider-range.ui-corner-all.ui-widget-header');
         let minPrice =  Number.parseInt(pricesElement.style.left)*1000000;
@@ -96,6 +98,13 @@ function main(){
 
         inputMinPrice.value = minPrice;
         inputMaxPrice.value = maxPrice;
+        formTag.submit();
+    })
+
+      
+    //Event for search with text
+    btnSearch.addEventListener('click', () => {
+        inputSearch.value = document.querySelector('.search-element .search').value;
         formTag.submit();
     })
 
