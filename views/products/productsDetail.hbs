@@ -1,3 +1,24 @@
+<!-- Product list in same id product in here -->
+<div id="product-list" style="display: none;">
+    <input type="hidden" id="idProduct" value="">
+    <input type="hidden" id="idCategory" value="">
+    {{#with productDetail}}
+    {{#each productList}}
+    <div class="category" style="display: none;">
+        <input type="hidden" name = "idProduct" value='{{MaSanPham}}'>
+        <input type="hidden" name = "idCategory" value='{{LoaiSanPham}}'>
+        <input type="hidden" name = "ram" value='{{Ram}}'>
+        <input type="hidden" name = "rom" value='{{Rom}}'>
+        <input type="hidden" name = "color" value='{{MauSac}}'>
+        <input type="hidden" name = "screen" value='{{ManHinh}}'>
+        <input type="hidden" name = "resolution" value='{{DoPhanGiai}}'>
+        <input type="hidden" name = "cpu" value='{{ChipXuLi}}'>
+        <input type="hidden" name = "battery" value='{{Pin}}'>
+        <input type="hidden" name = "price" value='{{DonGia}}'>
+    </div>
+    {{/each}}
+    {{/with}}
+</div>
 <!-- Product Details Area Start -->
 <div class="product-details-area pt-100px pb-100px">
     <div class="container">
@@ -36,7 +57,7 @@
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
-                <div class="product-details-content quickview-content ml-25px">
+                <div id="quickview" class="product-details-content quickview-content ml-25px">
                     {{#with productDetail}}
                     {{#with productInf}}
                     <h2>{{TenSanPham}}</h2>
@@ -66,55 +87,51 @@
                     {{#with productDetail}}
                     {{#with productInf}}
                     <p class="mt-30px">
-                        Ram: {{Ram}}; 
-                        Bớ nhớ trong: {{Rom}}; 
-                        Màn hình: {{ManHinh}}; 
-                        Pin: {{Pin}}
-                    {{/with}}
+                        Ram: <span class="description-basic ram">{{Ram}}</span>; 
+                        Bớ nhớ trong: <span class="description-basic rom">{{Rom}}</span>; 
+                        Màn hình: <span class="description-basic screen">{{ManHinh}}</span>; 
+                        Pin: <span class="description-basic battery">{{Pin}}</span>
                     </p>
+                    {{/with}}
                     <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
-                        <span>Loại:</span>
+                        <span>Loại: </span>
                         <ul class="d-flex">
                             <li>  
-                                <select name="product-type" id="">
-                                    {{#with productInf}}
-                                    <option value="">{{Ram}}GB/{{Rom}}GB</option>
-                                    {{/with}}
+                                <select name="product-type" id="choice-memory">
+                                    <option value="">Ram/Rom</option>
 
                                     {{#each memory}}
-                                    <option value="">{{Ram}}GB/{{Rom}}GB</option>
+                                    <option value="{{Ram}}/{{Rom}}">{{Ram}}GB/{{Rom}}GB</option>
                                     {{/each}}
                                 </select>
                             </li>
                         </ul>
                     </div>
-                    <div class="pro-details-categories-info pro-details-same-style d-flex m-0">
+                    <div class="pro-details-categories-info pro-details-same-style d-flex m-0 mt-3">
                         <span>Màu sắc: </span>
                         <ul class="d-flex">
                             <li>
-                                <select name="product-type" id="">
-                                    {{#with productInf}}
-                                    <option value="">{{MauSac}}</option>
-                                    {{/with}}
+                                <select name="product-type" id="choice-color" style="text-transform: capitalize;">
+                                    <option value="">Màu Sắc</option>
 
                                     {{#each color}}
-                                    <option value="">{{MauSac}}</option>
+                                    <option style="text-transform: capitalize;" value="{{MauSac}}">{{MauSac}}</option>
                                     {{/each}}
                                 </select>
                             </li>
                         </ul>
                     </div>
                     {{/with}}
-
+                    <span id="add-product-error" style="color: red; font-size: 0.9em;"></span>
                     <div class="pro-details-quality">
                         <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
+                            <input id="quantity-add-product" class="cart-plus-minus-box" type="text" name="qtybutton" value="1" />
                         </div>
                         <div class="pro-details-cart">
-                            <button class="add-cart">Thêm vào giỏ hàng</button>
+                            <button id="add-cart-btn" class="add-cart">Thêm vào giỏ hàng</button>
                         </div>
                         <div class="pro-details-compare-wishlist pro-details-wishlist ">
-                            <a href="/cart/wishlist"><i class="pe-7s-like"></i></a>
+                            <a id="add-wishlist-btn" href="javascript:{}"><i class="pe-7s-like"></i></a>
                         </div>
                         <div class="pro-details-compare-wishlist pro-details-wishlist ">
                             <a href="/products/productsCompare"><i class="pe-7s-refresh-2"></i></a>
@@ -138,13 +155,13 @@
                         <div id="des-details2" class="tab-pane">
                             <div class="product-anotherinfo-wrapper text-start">
                                 <ul>
-                                    <li><span>Ram: </span> {{Ram}}</li>
-                                    <li><span>Rom: </span> {{Rom}}</li>
-                                    <li><span>Màn hình: </span> {{ManHinh}}</li>
-                                    <li><span>Độ phân giải: </span> {{DoPhanGiai}}</li>
-                                    <li><span>Chip xử lí: </span> {{ChipXuLi}}</li>
-                                    <li><span>Pin: </span> {{Pin}}</li>
-                                    <li><span>Màu sắc: </span> {{MauSac}}</li>
+                                    <li><span>Ram: </span> <span class="description-detail ram">{{Ram}}</span></li>
+                                    <li><span>Rom: </span> <span class="description-detail rom">{{Rom}}</span></li>
+                                    <li><span>Màn hình: </span> <span class="description-detail screen">{{ManHinh}}</span></li>
+                                    <li><span>Độ phân giải: </span> <span class="description-detail resolution">{{DoPhanGiai}}</span></li>
+                                    <li><span>Chip xử lí: </span> <span class="description-detail cpu">{{ChipXuLi}}</span></li>
+                                    <li><span>Pin: </span> <span class="description-detail battery">{{Pin}}</span></li>
+                                    <li><span>Màu sắc: </span> <span class="description-detail color">{{MauSac}}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -286,15 +303,6 @@
                                     <span class="price">
                                     <span class="new">{{DonGiaThapNhat}} - {{DonGiaCaoNhat}}</span>
                                     </span>
-                                </div>
-                                <div class="actions">
-                                    <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                        class="pe-7s-shopbag"></i></button>
-                                    <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                            class="pe-7s-like"></i></button>
-                                    <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                    <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                            class="pe-7s-refresh-2"></i></button>
                                 </div>
                             </div>
                         </div>

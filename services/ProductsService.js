@@ -80,8 +80,8 @@ class ProductsService{
                 "",
                 "san_pham.TenSanPham ASC",
                 "san_pham.TenSanPham DESC",
-                "loai_san_pham.DonGia ASC",
-                "loai_san_pham.DonGia DESC",
+                "DonGiaNhoNhat ASC",
+                "DonGiaNhoNhat DESC",
             ]
             let sort = currentSort ? `ORDER BY ${typeSort[currentSort]}` : "";
             console.log(filter, sort)
@@ -104,7 +104,6 @@ class ProductsService{
                 {type: QueryTypes.SELECT}
             )
 
-            console.log(products);
             return products;
         }
         catch(error){
@@ -118,14 +117,58 @@ class ProductsService{
         })
     }
     
-    async getProductDetail(id){
+    // async getProductDetail(id){
+    //     try{
+    //         //Get products
+    //         let productsInf = await sequelize.query(
+    //             `SELECT *
+    //             FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
+    //                 JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
+    //             WHERE san_pham.MaSanPham = '${id}'`,
+    //             {type: QueryTypes.SELECT}
+    //         );
+
+    //         //Get images of product
+    //         let images = await sequelize.query(
+    //             `SELECT hinh_anh_san_pham.HinhAnh
+    //             FROM hinh_anh_san_pham
+    //             WHERE hinh_anh_san_pham.MaSanPham = '${id}'`,
+    //             {type: QueryTypes.SELECT}
+    //         );
+
+    //         //Get representation product
+    //         let productInf = productsInf[0];
+
+    //         //Get type product
+    //         let memory = productsInf.map(productInf => 
+    //             { return {Ram: productInf.Ram, Rom: productInf.Rom}});
+
+    //         memory = memory.filter((value, index, self) =>
+    //             index === self.findIndex((t) => (
+    //               t.Ram === value.Ram && t.Rom === value.Rom
+    //             ))
+    //         )
+
+    //         let color = productsInf.map(productInf => 
+    //             {return {MauSac: productInf.MauSac}});
+    //         color = [...new Set(color)];
+
+    //         return {productInf, images, memory, color}
+    //     }
+    //     catch(error){
+    //         console.log(error);
+    //     }
+        
+    // }
+
+    async getProductDetail(idProduct, idCategory){
         try{
             //Get products
-            let productsInf = await sequelize.query(
+            let productList = await sequelize.query(
                 `SELECT *
                 FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
                     JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
-                WHERE san_pham.MaSanPham = '${id}'`,
+                WHERE san_pham.MaSanPham = ${idProduct}`,
                 {type: QueryTypes.SELECT}
             );
 
@@ -133,15 +176,12 @@ class ProductsService{
             let images = await sequelize.query(
                 `SELECT hinh_anh_san_pham.HinhAnh
                 FROM hinh_anh_san_pham
-                WHERE hinh_anh_san_pham.MaSanPham = '${id}'`,
+                WHERE hinh_anh_san_pham.MaSanPham = '${idProduct}'`,
                 {type: QueryTypes.SELECT}
             );
 
-            //Get representation product
-            let productInf = productsInf[0];
-
             //Get type product
-            let memory = productsInf.map(productInf => 
+            let memory = productList.map(productInf => 
                 { return {Ram: productInf.Ram, Rom: productInf.Rom}});
 
             memory = memory.filter((value, index, self) =>
@@ -150,16 +190,28 @@ class ProductsService{
                 ))
             )
 
-            let color = productsInf.map(productInf => 
+            let color = productList.map(productInf => 
                 {return {MauSac: productInf.MauSac}});
             color = [...new Set(color)];
 
-            return {productInf, images, memory, color}
+            //Get representation product
+            let productInf;
+            if(idCategory){
+                productInf = productList.filter(product => {
+                    return product.LoaiSanPham == idCategory;
+                });
+            }
+            else{
+                productInf = productList.reduce(function(prev, curr) {
+                    return prev.DonGia < curr.DonGia ? prev : curr;
+                });
+            }
+
+            return {productInf, images, memory, color, productList}
         }
         catch(error){
             console.log(error);
         }
-        
     }
 
     async getRelatedProducts(id){
