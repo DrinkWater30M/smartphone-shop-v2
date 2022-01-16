@@ -9,7 +9,8 @@ function createWishList(data){
                 `<li>
                     <a href="/products/detail?id=${data[i].MaSanPham}" class="image"><img src=${data[i].HinhAnh} alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="/products/detail?id=${data[i].MaSanPham}" class="title">${data[i].TenSanPham}/${data[i].TenLoaiSanPham}</a>
+                        <a href="/products/detail?id=${data[i].MaSanPham}" class="title">
+                            ${data[i].TenSanPham}<br>${data[i].TenLoaiSanPham}<br>${data[i].MauSac}</a>
                         <span class="quantity-price">1 x <span class="amount">${data[i].DonGia}vnđ</span></span>
                         <a href="javascript:{}" class="remove">×</a>
                     </div>
@@ -31,7 +32,9 @@ function createCart(data){
                 `<li>
                     <a href="/products/detail?id=${data[i].MaSanPham}" class="image"><img src=${data[i].HinhAnh} alt="Cart product Image"></a>
                     <div class="content">
-                        <a href="/products/detail?id=${data[i].MaSanPham}" class="title">${data[i].TenSanPham}/${data[i].TenLoaiSanPham}</a>
+                        <a href="/products/detail?id=${data[i].MaSanPham}" class="title">
+                            ${data[i].TenSanPham}<br>${data[i].TenLoaiSanPham}<br>${data[i].MauSac}
+                        </a>
                         <span class="quantity-price">${data[i].SoLuongMua} x <span class="amount">${data[i].DonGia}vnđ</span></span>
                         <a href="javascript:{}" class="remove">×</a>
                     </div>

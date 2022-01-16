@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const cartController = require('../controllers/CartController')
+const cartController = require('../controllers/CartController');
+const middleware = require('../middleware/MiddleWare');
 
 /* Choice controller for /wishlist */
 router.get('/wishlist', cartController.getWishlistPage);
@@ -9,7 +10,7 @@ router.get('/wishlist', cartController.getWishlistPage);
 router.get('/cart', cartController.getCartPage);
 
 /* Choice controller for /checkout */
-router.get('/checkout', cartController.getCheckoutPage);
+router.get('/checkout', middleware.isVerify, cartController.getCheckoutPage);
 
 /* Choice controller for /thankyou */
   router.get('/thankyou', cartController.getThankyouPage);

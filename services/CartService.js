@@ -7,7 +7,7 @@ class CartService{
         try{
             let products = await sequelize.query(
                 `SELECT loai_san_pham.MaSanPham, loai_san_pham.LoaiSanPham, san_pham.TenSanPham,
-                    loai_san_pham.TenLoaiSanPham, loai_san_pham.DonGia,
+                    loai_san_pham.TenLoaiSanPham, loai_san_pham.MauSac, loai_san_pham.DonGia,
                     (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham WHERE hinh_anh_san_pham.MaSanPham = loai_san_pham.MaSanPham LIMIT 0,1) AS HinhAnh
                 FROM gio_yeu_thich JOIN loai_san_pham ON gio_yeu_thich.LoaiSanPham = loai_san_pham.LoaiSanPham 
                     AND gio_yeu_thich.MaSanPham = loai_san_pham.MaSanPham
@@ -27,7 +27,7 @@ class CartService{
         try{
             let products = await sequelize.query(
                 `SELECT loai_san_pham.MaSanPham, loai_san_pham.LoaiSanPham, san_pham.TenSanPham,
-                    loai_san_pham.TenLoaiSanPham, loai_san_pham.DonGia, gio_hang.SoLuongMua,
+                    loai_san_pham.TenLoaiSanPham, loai_san_pham.MauSac, loai_san_pham.DonGia, gio_hang.SoLuongMua,
                     (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham WHERE hinh_anh_san_pham.MaSanPham = loai_san_pham.MaSanPham LIMIT 0,1) AS HinhAnh
                 FROM gio_hang JOIN loai_san_pham ON gio_hang.LoaiSanPham = loai_san_pham.LoaiSanPham 
                     AND gio_hang.MaSanPham = loai_san_pham.MaSanPham

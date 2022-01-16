@@ -10,7 +10,14 @@ function main(){
 
     let orderBtn = document.getElementById('order');
     orderBtn.addEventListener('click', ()=>{
+        let errorTag = document.getElementById('order-error');
+
         //Validate input
+        if(priceEachProduct.length == 0){
+            errorTag.innerText = "Không có sản phẩm nào để thanh toán!";
+            return;
+        }
+
         let inputTags = document.querySelectorAll('input[class="info"]');
         let bonusInput = document.querySelector('textarea[name="message"]');
         let emptyData = false;
@@ -23,7 +30,6 @@ function main(){
 
         if(emptyData){
             //Notification
-            let errorTag = document.getElementById('order-error');
             errorTag.innerText = "Hãy điền đầy đủ thông tin cần thiết!";
         }
         else{
@@ -50,7 +56,7 @@ function main(){
     
                     if(xhr.responseText) { message = JSON.parse(xhr.responseText).error};
     
-                    alert(message);
+                    console.log(message);
                 }
             })
         }

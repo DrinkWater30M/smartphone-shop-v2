@@ -88,9 +88,11 @@ class ProductsService{
                 "san_pham.TenSanPham DESC",
                 "DonGiaNhoNhat ASC",
                 "DonGiaNhoNhat DESC",
+                "rand()",
+                "loai_san_pham.Pin DESC",
+                "loai_san_pham.Rom DESC",
             ]
             let sort = currentSort ? `ORDER BY ${typeSort[currentSort]}` : "";
-            console.log(filter, sort)
 
             //Cal offset
             let offset = (currentPage - 1) * itemsPerPage;
@@ -98,7 +100,7 @@ class ProductsService{
             //Query
             let products = await sequelize.query(
                 `SELECT san_pham.MaSanPham, san_pham.TenSanPham, san_pham.MoTa,
-                min(loai_san_pham.DonGia) AS DonGiaNhoNhat, thuong_hieu.ThuongHieu,
+                MIN(loai_san_pham.DonGia) AS DonGiaNhoNhat, thuong_hieu.ThuongHieu, loai_san_pham.*,
                     (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham
                         WHERE hinh_anh_san_pham.MaSanPham = san_pham.MaSanPham LIMIT 1) AS HinhAnhDaiDien
                 FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
