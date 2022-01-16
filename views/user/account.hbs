@@ -6,8 +6,8 @@
                 <!-- Nav tabs -->
                 <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
                     <ul role="tablist" class="nav flex-column dashboard-list">
-                        <li> <a href="#orders" data-bs-toggle="tab" class="nav-link active">Đơn hàng</a></li>
-                        <li><a href="#account-details" data-bs-toggle="tab" class="nav-link">Thông tin cá nhân</a>
+                        <li><a href="#account-details" data-bs-toggle="tab" class="nav-link active">Thông tin cá nhân</a>
+                        <li> <a href="#orders" data-bs-toggle="tab" class="nav-link">Đơn hàng</a></li>
                         <li><a href="#email-verification" data-bs-toggle="tab" class="nav-link">Xác minh tài khoản</a>
                         <li><a href="#reset-password" data-bs-toggle="tab" class="nav-link">Đổi mật khẩu</a></li>
                         </li>
@@ -18,35 +18,7 @@
             <div class="col-sm-12 col-md-9 col-lg-9">
                 <!-- Tab panes -->
                 <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
-                    <div class="tab-pane fade show active" id="orders">
-                        <h4>Đơn hàng</h4>
-                        <div class="table_page table-responsive">
-                            <table id="bills" style="width: 100%;">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%;">STT</th>
-                                        <th style="width: 40%;">Tên/Loại Sản Phẩm</th>
-                                        <th style="width: 20%;">Thành Tiền(vnđ)</th>
-                                        <th style="width: 15%;">Ngày Đặt</th>
-                                        <th style="width: 15%;">Trạng Thái</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{!--
-                                    Template for each bill 
-                                    <tr>
-                                        <td style="width: 5%;">1</td>
-                                        <td style="width: 40%;"><span class="success">sdfs sf sfs s fs fsf s fs fs</span></td>
-                                        <td style="width: 20%;">$25.00 for 1 item </td>
-                                        <td style="width: 15%;">May 10, 2018</td>
-                                        <td style="width: 15%;"><a href="/#" class="view">Xem</a></td>
-                                    </tr>
-                                     --}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="account-details">
+                    <div class="tab-pane fade show active" id="account-details">
                         <h3>Thông Tin Cá Nhân </h3>
                         <div class="login">
                             <div class="login_form_container">
@@ -74,6 +46,34 @@
                                     </form>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="orders">
+                        <h4>Đơn hàng</h4>
+                        <div class="table_page table-responsive">
+                            <table id="bills" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 5%;">STT</th>
+                                        <th style="width: 40%;">Tên/Loại Sản Phẩm</th>
+                                        <th style="width: 20%;">Thành Tiền(vnđ)</th>
+                                        <th style="width: 15%;">Ngày Đặt</th>
+                                        <th style="width: 15%;">Trạng Thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{!--
+                                    Template for each bill 
+                                    <tr>
+                                        <td style="width: 5%;">1</td>
+                                        <td style="width: 40%;"><span class="success">sdfs sf sfs s fs fsf s fs fs</span></td>
+                                        <td style="width: 20%;">$25.00 for 1 item </td>
+                                        <td style="width: 15%;">May 10, 2018</td>
+                                        <td style="width: 15%;"><a href="/#" class="view">Xem</a></td>
+                                    </tr>
+                                     --}}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="email-verification">

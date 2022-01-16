@@ -128,6 +128,11 @@ class ApiCartController{
             let billInfo = req.body;
             let products = await cartService.getCart(idUser);
 
+            if(products.length == 0){
+                res.status(422).json({error: "Không có sản phẩm để lên đơn!"});
+                return
+            }
+            
             //Add bill
             await cartService.addBill(idUser, billInfo, products);
 

@@ -37,13 +37,15 @@ class UserController{
     async register(req, res, next){
         //Get email and password of user
         const {email, password} = req.body;
-        let user = {Email: email, Password: password};
 
         //Register information user to database
-        let statusRegister = await userService.registerAccount(user.Email, user.Password, req);
+        let statusRegister = await userService.registerAccount(email, password, req);
 
         if(statusRegister){
             //Auto login and redirect
+            let idUser = await userService.getIdUser(email);
+            let user = {MaKhachHang:idUser, Email: email};
+            
             req.login(user, function(err) {
                 if (err) {
                     return next(err);

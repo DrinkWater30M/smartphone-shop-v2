@@ -5,16 +5,16 @@
         <!-- Hero slider Active -->
         <div class="swiper-wrapper">
             <!-- Single slider item -->
-            <div class="hero-slide-item slider-height-2 swiper-slide bg-color1" data-bg-image="/images/hero/bg/hero-bg-2-1.webp">
+            <div class="hero-slide-item slider-height-2 swiper-slide bg-color1" data-bg-image="/images/banner/background1.jpg">
                 <div class="container h-100">
                     <div class="row h-100 flex-row-reverse">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
                             <div class="hero-slide-content hero-slide-content-2 slider-animated-1">
-                                <h2 class="title-1">Easy Your Life <br>
+                                <h2 class="title-1" style="color: black; font-weight: bold;">Easy Your Life <br>
                                 For Smart Device </h2>
                                 <span class="price">
                                     <span class="mini-title">Chỉ</span>
-                                <span class="amount">$24.00</span>
+                                <span class="amount">10 000 000vnđ</span>
                                 </span>
                                 <a href="/products" class="btn btn-primary text-capitalize">Sản Phẩm</a>
                             </div>
@@ -22,7 +22,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-center">
                             <div class="show-case">
                                 <div class="hero-slide-image slider-2">
-                                    <img src="/images/hero/inner-img/hero-2-1.png" alt="" />
+                                    <img src="/images/banner/banner1.png" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -30,16 +30,16 @@
                 </div>
             </div>
             <!-- Single slider item -->
-            <div class="hero-slide-item slider-height-2 swiper-slide bg-color1" data-bg-image="/images/hero/bg/hero-bg-2-1.webp">
+            <div class="hero-slide-item slider-height-2 swiper-slide bg-color1" data-bg-image="/images/banner/background2.png">
                 <div class="container h-100">
                     <div class="row h-100 flex-row-reverse">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
                             <div class="hero-slide-content hero-slide-content-2 slider-animated-1">
-                                <h2 class="title-1">Easy Your Life <br>
+                                <h2 class="title-1" style="color: white; font-weight:bold;">Easy Your Life <br>
                                 For Smart Device </h2>
                                 <span class="price">
                                     <span class="mini-title">Chỉ</span>
-                                <span class="amount">$24.00</span>
+                                <span class="amount">15 000 000vnđ</span>
                                 </span>
                                 <a href="/products" class="btn btn-primary text-capitalize">Sản Phẩm</a>
                             </div>
@@ -47,7 +47,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-center">
                             <div class="show-case">
                                 <div class="hero-slide-image slider-2">
-                                    <img src="/images/hero/inner-img/hero-2-1.png" alt="" />
+                                    <img src="/images/banner/banner2.png" alt="" />
                                 </div>
                             </div>
                         </div>
@@ -69,26 +69,18 @@
 <div class="banner-area style-two pt-100px pb-100px">
     <div class="container">
         <div class="row">
+            {{#each productsRandom}}
             <div class="col-md-6">
                 <div class="single-banner nth-child-2 mb-lm-30px">
-                    <img src="/images/banner/6.webp" alt="">
+                    <img style="height:100%;" src="{{HinhAnhDaiDien}}" alt="">
                     <div class="banner-content nth-child-3">
-                        <h3 class="title">Iphone</h3>
-                        <span class="category">From $69.00</span>
-                        <a href="/products" class="shop-link">Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                        <h3 class="title" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">{{ThuongHieu}}</h3>
+                        <span class="category" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Chỉ {{DonGiaNhoNhat}}vnđ</span>
+                        <a href="/products/detail/?id={{MaSanPham}}" class="shop-link">Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="single-banner nth-child-2">
-                    <img src="/images/banner/6.webp" alt="">
-                    <div class="banner-content nth-child-2">
-                        <h3 class="title">Xiaomi</h3>
-                        <span class="category">From $95.00</span>
-                        <a href="/products" class="shop-link">Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
 </div>
@@ -100,7 +92,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h2 class="title">Sản Phẩm Mới</h2>
+                    <h2 class="title">Sản Phẩm Cao Cấp</h2>
                 </div>
             </div>
         </div>
@@ -108,6 +100,7 @@
         <div class="row">
             <div class="col">
                 <div class="row mb-n-30px">
+                    {{#each productsMaxPrice}}
                     <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
                         <!-- Single Prodect -->
                         <div class="product">
@@ -115,259 +108,25 @@
                                 <span class="new">Mới</span>
                             </span>
                             <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
+                                <a href="/products/detail?id={{MaSanPham}}" class="image">
+                                    <img src="{{HinhAnhDaiDien}}" alt="Product" />
+                                    <img class="hover-image" src="{{HinhAnhDaiDien}}" alt="Product" />
                                 </a>
                             </div>
                             <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Modern Smart Phone
+                                <span class="category"><a href="#">{{ThuongHieu}}</a></span>
+                                <h5 class="title">
+                                    <a href="/products/detail?id={{MaSanPham}}">
+                                        {{TenSanPham}}
                                     </a>
                                 </h5>
                                 <span class="price">
-                                    <span class="new">$38.50</span>
+                                    <span class="new">{{DonGiaNhoNhat}}</span>
                                 </span>
                             </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="sale">-10%</span>
-                            <span class="new">Giảm giá</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Bluetooth Headphone
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="old">$48.50</span>
-                                <span class="new">$38.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="new">Mới</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Smart Music Box
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="new">$38.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="new">Mới</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Air Pods 25Hjkl Black
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="new">$38.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Smart Hand Watch
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="new">$38.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="sale">-8%</span>
-                            <span class="new">Giảm giá</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Smart Table Camera
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="old">$138.50</span>
-                                <span class="new">$112.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="new">Mới</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Round Pocket Router
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="new">$38.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xl-3 col-md-6 col-sm-6 col-xs-6 mb-30px">
-                        <!-- Single Prodect -->
-                        <div class="product">
-                            <span class="badges">
-                                <span class="sale">-5%</span>
-                            </span>
-                            <div class="thumb">
-                                <a href="/products/detail" class="image">
-                                    <img src="/images/product-image/product.jpg" alt="Product" />
-                                    <img class="hover-image" src="/images/product-image/product.jpg" alt="Product" />
-                                </a>
-                            </div>
-                            <div class="content">
-                                <span class="category"><a href="#">Iphone</a></span>
-                                <h5 class="title"><a href="/products/detail">Power Bank 10000Mhp
-                                    </a>
-                                </h5>
-                                <span class="price">
-                                    <span class="old">$260.00</span>
-                                <span class="new">$238.50</span>
-                                </span>
-                            </div>
-                            <div class="actions">
-                                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                                            class="pe-7s-shopbag"></i></button>
-                                        <button class="action wishlist" title="Wishlist" data-bs-toggle="modal" data-bs-target="#exampleModal-Wishlist"><i
-                                                class="pe-7s-like"></i></button>
-                                        <button class="action quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="pe-7s-look"></i></button>
-                                        <button class="action compare" title="Compare" data-bs-toggle="modal" data-bs-target="#exampleModal-Compare"><i
-                                                class="pe-7s-refresh-2"></i></button>
-                                    </div>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -378,29 +137,35 @@
 <div class="banner-area style-three pb-100px">
     <div class="container">
         <div class="row">
+            {{#with productMaxRom}}
             <div class="col-md-6">
                 <div class="single-banner mb-lm-30px">
-                    <img src="/images/banner/8.webp" alt="">
-                    <div class="banner-content nth-child-3">
-                        <h3 class="title">Thiết Kế Độc Đáo <br>
-                                Hiện Đại</h3>
-                        <span class="category">From $69.00</span>
-                        <a href="/products" class="shop-link">Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    <img src="{{HinhAnhDaiDien}}" alt="">
+                    <div class="banner-content nth-child-3"  style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                        <h4 style="color: white;">{{TenSanPham}}</h4>
+                        <h3 class="title">Dung Lượng Lưu Trữ<br>
+                                Cực Lớn({{Rom}}GB)</h3>
+                        <span class="category" style="color: white;">Chỉ {{DonGiaNhoNhat}}vnđ</span>
+                        <a href="/products/detail/?id={{MaSanPham}}" class="shop-link">Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
+            {{/with}}
+            {{#with productMaxBattery}}
             <div class="col-md-6">
                 <div class="single-banner">
-                    <img src="/images/banner/8.webp" alt="">
-                    <div class="banner-content nth-child-2">
+                    <img src="{{HinhAnhDaiDien}}" alt="">
+                    <div class="banner-content nth-child-2" style="text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                        <h4 style="color: white;">{{TenSanPham}}</h4>
                         <h3 class="title">Dung Lượng Pin Khủng <br>
-                                Dùng Thả Ga</h3>
-                        <span class="category">From $95.00</span>
-                        <a href="/products" class="shop-link">
+                                Dùng Thả Ga({{Pin}}mAh)</h3>
+                        <span class="category" style="color: white;">Chỉ {{DonGiaNhoNhat}}vnđ</span>
+                        <a href="/products/detail?id={{MaSanPham}}" class="shop-link">
                         Chi tiết <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
+            {{/with}}
         </div>
     </div>
 </div>
@@ -411,128 +176,42 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h2 class="title">Siêu Giảm Giá</h2>
+                    <h2 class="title">Giá Siêu Thấp</h2>
                 </div>
             </div>
         </div>
         <div class="feature-product-slider swiper-container slider-nav-style-1">
             <div class="swiper-wrapper">
+                {{#each productsMinPrice}}
                 <div class="swiper-slide feature-right-content">
                     <div class="image-side">
-                        <img src="/images/feature-image/2.webp" alt="">
-                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                            class="pe-7s-shopbag"></i></button>
+                        <a href="/products/detail?id={{MaSanPham}}">
+                            <img src="{{HinhAnhDaiDien}}" alt="">
+                        </a>
                     </div>
                     <div class="content-side">
                         <div class="deal-timing">
                             <span>Còn lại: </span>
-                            <div data-countdown="2021/09/15"></div>
+                            <div data-countdown="2022/03/01"></div>
                         </div>
                         <div class="prize-content">
-                            <h5 class="title"><a href="/products/detail">Iphone 13 Pro Max</a></h5>
+                            <h5 class="title"><a href="/products/detail?id={{MaSanPham}}">{{TenSanPham}}</a></h5>
                             <span class="price">
-                        <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
+                                <span class="new">{{DonGiaNhoNhat}}vnđ</span>
                             </span>
                         </div>
                         <div class="product-feature">
                             <ul>
-                                <li>Ram : <span>6GB</span></li>
-                                <li>Rom : <span>128GB</span></li>
-                                <li>Pin : <span>4000mAh.</span></li>
-                                <li>Độ phân giải : <span>2k</span></li>
-                                <li>Chip xử lí : <span>A15 6 nhân</span></li>
+                                <li>Ram : <span>{{Ram}}GB</span></li>
+                                <li>Rom : <span>{{Rom}}GB</span></li>
+                                <li>Pin : <span>{{Pin}}mAh.</span></li>
+                                <li>Độ phân giải : <span>{{DoPhanGiai}}</span></li>
+                                <li>Chip xử lí : <span>{{ChipXuLi}}</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide feature-right-content">
-                    <div class="image-side">
-                        <img src="/images/feature-image/2.webp" alt="">
-                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                            class="pe-7s-shopbag"></i></button>
-                    </div>
-                    <div class="content-side">
-                        <div class="deal-timing">
-                            <span>Còn lại: </span>
-                            <div data-countdown="2021/09/15"></div>
-                        </div>
-                        <div class="prize-content">
-                            <h5 class="title"><a href="/products/detail">Iphone 13 Pro Max</a></h5>
-                            <span class="price">
-                        <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
-                            </span>
-                        </div>
-                        <div class="product-feature">
-                            <ul>
-                                <li>Ram : <span>6GB</span></li>
-                                <li>Rom : <span>128GB</span></li>
-                                <li>Pin : <span>4000mAh.</span></li>
-                                <li>Độ phân giải : <span>2k</span></li>
-                                <li>Chip xử lí : <span>A15 6 nhân</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide feature-right-content">
-                    <div class="image-side">
-                        <img src="/images/feature-image/2.webp" alt="">
-                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                            class="pe-7s-shopbag"></i></button>
-                    </div>
-                    <div class="content-side">
-                        <div class="deal-timing">
-                            <span>Còn lại: </span>
-                            <div data-countdown="2021/09/15"></div>
-                        </div>
-                        <div class="prize-content">
-                            <h5 class="title"><a href="/products/detail">Iphone 13 Pro Max</a></h5>
-                            <span class="price">
-                        <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
-                            </span>
-                        </div>
-                        <div class="product-feature">
-                            <ul>
-                                <li>Ram : <span>6GB</span></li>
-                                <li>Rom : <span>128GB</span></li>
-                                <li>Pin : <span>4000mAh.</span></li>
-                                <li>Độ phân giải : <span>2k</span></li>
-                                <li>Chip xử lí : <span>A15 6 nhân</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide feature-right-content">
-                    <div class="image-side">
-                        <img src="/images/feature-image/2.webp" alt="">
-                        <button title="Add To Cart" class="action add-to-cart" data-bs-toggle="modal" data-bs-target="#exampleModal-Cart"><i
-                            class="pe-7s-shopbag"></i></button>
-                    </div>
-                    <div class="content-side">
-                        <div class="deal-timing">
-                            <span>Còn lại: </span>
-                            <div data-countdown="2021/09/15"></div>
-                        </div>
-                        <div class="prize-content">
-                            <h5 class="title"><a href="/products/detail">Iphone 13 Pro Max</a></h5>
-                            <span class="price">
-                        <span class="old">$48.50</span>
-                            <span class="new">$38.50</span>
-                            </span>
-                        </div>
-                        <div class="product-feature">
-                            <ul>
-                                <li>Ram : <span>6GB</span></li>
-                                <li>Rom : <span>128GB</span></li>
-                                <li>Pin : <span>4000mAh.</span></li>
-                                <li>Độ phân giải : <span>2k</span></li>
-                                <li>Chip xử lí : <span>A15 6 nhân</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                {{/each}}
             </div>
             <!-- Add Arrows -->
             <div class="swiper-buttons">
@@ -544,11 +223,11 @@
 </div>
 <!-- Feature product area End -->
 <!-- Fashion Area Start -->
-<div class="fashion-area" data-bg-image="/images/fashion/fashion-bg.webp">
+<div class="fashion-area" data-bg-image="/images/banner/background3.jpg">
     <div class="container h-100">
         <div class="row justify-content-center align-items-center h-100">
             <div class="col-12 text-center">
-                <h2 class="title"> <span>Smartphone Shop</span> Cửa Hàng Bán Lẻ Số 1 Việt Nam </h2>
+                <h2 class="title" style="color: black"> <span>Smartphone Shop</span> Cửa Hàng Bán Lẻ Số 1 Việt Nam </h2>
                 <a href="/products" class="btn btn-primary text-capitalize m-auto">Sản Phẩm</a>
             </div>
         </div>

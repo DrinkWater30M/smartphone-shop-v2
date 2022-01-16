@@ -45,8 +45,8 @@ function main(){
     })
 
     //Call ajax when click information account tab
-    let accoutDetail = document.querySelector('a[href="#account-details"]');
-    accoutDetail.addEventListener('click', ()=>{
+    let accountDetail = document.querySelector('a[href="#account-details"]');
+    accountDetail.addEventListener('click', ()=>{
         $.ajax({
             url:'/api/user/account',
             type: 'GET',
@@ -254,7 +254,15 @@ function main(){
     })
 
     //Set tab defaut
-    orderDetail.click();
+    let url = window.location.href;
+    let tab = url.split('?')[1];
+    if(tab){
+        document.querySelector(`a[href="#${tab.split('=')[1]}"]`).click();
+    }
+    else{
+        accountDetail.click();
+    }
+
 }
 
 main();
