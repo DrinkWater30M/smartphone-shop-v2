@@ -6,13 +6,13 @@ class CartService{
     async getWishList(idUser){
         try{
             let products = await sequelize.query(
-                `SELECT loai_san_pham.MaSanPham, loai_san_pham.LoaiSanPham, san_pham.TenSanPham,
-                    loai_san_pham.TenLoaiSanPham, loai_san_pham.MauSac, loai_san_pham.DonGia,
-                    (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham WHERE hinh_anh_san_pham.MaSanPham = loai_san_pham.MaSanPham LIMIT 0,1) AS HinhAnh
-                FROM gio_yeu_thich JOIN loai_san_pham ON gio_yeu_thich.LoaiSanPham = loai_san_pham.LoaiSanPham 
-                    AND gio_yeu_thich.MaSanPham = loai_san_pham.MaSanPham
-                    JOIN san_pham ON gio_yeu_thich.MaSanPham = san_pham.MaSanPham
-                WHERE gio_yeu_thich.MaKhachHang = ${idUser}`,
+                `SELECT LOAI_SAN_PHAM.MaSanPham, LOAI_SAN_PHAM.LoaiSanPham, SAN_PHAM.TenSanPham,
+                    LOAI_SAN_PHAM.TenLoaiSanPham, LOAI_SAN_PHAM.MauSac, LOAI_SAN_PHAM.DonGia,
+                    (SELECT HINH_ANH_SAN_PHAM.HinhAnh FROM HINH_ANH_SAN_PHAM WHERE HINH_ANH_SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham LIMIT 0,1) AS HinhAnh
+                FROM GIO_YEU_THICH JOIN LOAI_SAN_PHAM ON GIO_YEU_THICH.LoaiSanPham = LOAI_SAN_PHAM.LoaiSanPham 
+                    AND GIO_YEU_THICH.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                    JOIN SAN_PHAM ON GIO_YEU_THICH.MaSanPham = san_pham.MaSanPham
+                WHERE GIO_YEU_THICH.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT}
             );
 
@@ -26,13 +26,13 @@ class CartService{
     async getCart(idUser){
         try{
             let products = await sequelize.query(
-                `SELECT loai_san_pham.MaSanPham, loai_san_pham.LoaiSanPham, san_pham.TenSanPham,
-                    loai_san_pham.TenLoaiSanPham, loai_san_pham.MauSac, loai_san_pham.DonGia, gio_hang.SoLuongMua,
-                    (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham WHERE hinh_anh_san_pham.MaSanPham = loai_san_pham.MaSanPham LIMIT 0,1) AS HinhAnh
-                FROM gio_hang JOIN loai_san_pham ON gio_hang.LoaiSanPham = loai_san_pham.LoaiSanPham 
-                    AND gio_hang.MaSanPham = loai_san_pham.MaSanPham
-                    JOIN san_pham ON gio_hang.MaSanPham = san_pham.MaSanPham
-                WHERE gio_hang.MaKhachHang = ${idUser}`,
+                `SELECT LOAI_SAN_PHAM.MaSanPham, LOAI_SAN_PHAM.LoaiSanPham, SAN_PHAM.TenSanPham,
+                    LOAI_SAN_PHAM.TenLoaiSanPham, LOAI_SAN_PHAM.MauSac, LOAI_SAN_PHAM.DonGia, GIO_HANG.SoLuongMua,
+                    (SELECT HINH_ANH_SAN_PHAM.HinhAnh FROM HINH_ANH_SAN_PHAM WHERE HINH_ANH_SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham LIMIT 0,1) AS HinhAnh
+                FROM GIO_HANG JOIN LOAI_SAN_PHAM ON GIO_HANG.LoaiSanPham = LOAI_SAN_PHAM.LoaiSanPham 
+                    AND GIO_HANG.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                    JOIN SAN_PHAM ON GIO_HANG.MaSanPham = SAN_PHAM.MaSanPham
+                WHERE GIO_HANG.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT}
             );
 
@@ -47,16 +47,16 @@ class CartService{
         try{
             //Check wishlist previous
             let product = await sequelize.query(
-                `SELECT * FROM gio_yeu_thich
-                WHERE gio_yeu_thich.MaKhachHang = ${idUser} AND gio_yeu_thich.MaSanPham = ${idProduct} 
-                    AND gio_yeu_thich.LoaiSanPham = '${idCategory}'`,
+                `SELECT * FROM GIO_YEU_THICH
+                WHERE GIO_YEU_THICH.MaKhachHang = ${idUser} AND GIO_YEU_THICH.MaSanPham = ${idProduct} 
+                    AND GIO_YEU_THICH.LoaiSanPham = '${idCategory}'`,
                 {type: QueryTypes.SELECT}
             )
 
             //If not in wishlist, then product will add
             if(product.length == 0){
                 await sequelize.query(
-                    `INSERT INTO gio_yeu_thich(MaKhachHang, MaSanPham, LoaiSanPham)
+                    `INSERT INTO GIO_YEU_THICH(MaKhachHang, MaSanPham, LoaiSanPham)
                         VALUE(${idUser}, ${idProduct}, '${idCategory}');`
                 );
             }
@@ -70,23 +70,23 @@ class CartService{
         try{
             //Check cart previous
             let product = await sequelize.query(
-                `SELECT * FROM gio_hang
-                WHERE gio_hang.MaKhachHang = ${idUser} AND gio_hang.MaSanPham = ${idProduct} 
-                    AND gio_hang.LoaiSanPham = '${idCategory}'`,
+                `SELECT * FROM GIO_HANG
+                WHERE GIO_HANG.MaKhachHang = ${idUser} AND GIO_HANG.MaSanPham = ${idProduct} 
+                    AND GIO_HANG.LoaiSanPham = '${idCategory}'`,
                 {type: QueryTypes.SELECT}
             )
 
             if(product.length != 0){
                 let newQuantity = product[0].SoLuongMua + Number.parseInt(quantityProduct);
                 await sequelize.query(
-                    `UPDATE gio_hang SET gio_hang.SoLuongMua = ${newQuantity}
-                    WHERE gio_hang.MaKhachHang = ${idUser} AND gio_hang.MaSanPham = ${idProduct} 
-                    AND gio_hang.LoaiSanPham = '${idCategory}'`
+                    `UPDATE GIO_HANG SET GIO_HANG.SoLuongMua = ${newQuantity}
+                    WHERE GIO_HANG.MaKhachHang = ${idUser} AND GIO_HANG.MaSanPham = ${idProduct} 
+                    AND GIO_HANG.LoaiSanPham = '${idCategory}'`
                 );
             }
             else{
                 await sequelize.query(
-                    `INSERT INTO gio_hang(MaKhachHang, MaSanPham, LoaiSanPham, SoLuongMua)
+                    `INSERT INTO GIO_HANG(MaKhachHang, MaSanPham, LoaiSanPham, SoLuongMua)
                         VALUE(${idUser}, ${idProduct}, '${idCategory}', ${quantityProduct});`
                 );
             }
@@ -99,9 +99,9 @@ class CartService{
     async deleteProductInWishList(idUser, idProduct, idCategory){
         try{
             await sequelize.query(
-                `DELETE FROM gio_yeu_thich
-                WHERE gio_yeu_thich.MaKhachHang = ${idUser} AND gio_yeu_thich.MaSanPham = ${idProduct}
-                    AND gio_yeu_thich.LoaiSanPham = '${idCategory}';`
+                `DELETE FROM GIO_YEU_THICH
+                WHERE GIO_YEU_THICH.MaKhachHang = ${idUser} AND GIO_YEU_THICH.MaSanPham = ${idProduct}
+                    AND GIO_YEU_THICH.LoaiSanPham = '${idCategory}';`
             )
         }
         catch(error){
@@ -112,9 +112,9 @@ class CartService{
     async deleteProductInCart(idUser, idProduct, idCategory){
         try{
             await sequelize.query(
-                `DELETE FROM gio_hang
-                WHERE gio_hang.MaKhachHang = ${idUser} AND gio_hang.MaSanPham = ${idProduct}
-                    AND gio_hang.LoaiSanPham = '${idCategory}';`
+                `DELETE FROM GIO_HANG
+                WHERE GIO_HANG.MaKhachHang = ${idUser} AND GIO_HANG.MaSanPham = ${idProduct}
+                    AND GIO_HANG.LoaiSanPham = '${idCategory}';`
             )
         }
         catch(error){
@@ -125,8 +125,8 @@ class CartService{
     async deleteAllProductInCart(idUser){
         try{
             await sequelize.query(
-                `DELETE FROM gio_hang
-                WHERE gio_hang.MaKhachHang = ${idUser};`
+                `DELETE FROM GIO_HANG
+                WHERE GIO_HANG.MaKhachHang = ${idUser};`
             )
         }
         catch(error){
@@ -138,9 +138,9 @@ class CartService{
         try{
             for(let i = 0; i < productList.length; i++){
                 await sequelize.query(
-                    `UPDATE gio_hang SET gio_hang.SoLuongMua = ${productList[i].quantityProduct}
-                    WHERE gio_hang.MaKhachHang = ${idUser} AND gio_hang.MaSanPham = ${productList[i].idProduct}
-                    AND gio_hang.LoaiSanPham = '${productList[i].idCategory}';`
+                    `UPDATE GIO_HANG SET GIO_HANG.SoLuongMua = ${productList[i].quantityProduct}
+                    WHERE GIO_HANG.MaKhachHang = ${idUser} AND GIO_HANG.MaSanPham = ${productList[i].idProduct}
+                    AND GIO_HANG.LoaiSanPham = '${productList[i].idCategory}';`
                 ) 
             };
         }
@@ -156,7 +156,7 @@ class CartService{
         try{
             for(let i = 0; i < products.length; i++){
                 await sequelize.query(
-                    `INSERT INTO don_hang(MaKhachHang, MaSanPham, LoaiSanPham, DonGia, SoLuongSanPham, ThoiGian,
+                    `INSERT INTO DON_HANG(MaKhachHang, MaSanPham, LoaiSanPham, DonGia, SoLuongSanPham, ThoiGian,
                         HoTen, SoDienThoai, Email, DiaChiGiaoHang, TrangThaiDonHang, LuuYCuaNguoiMua)
                     VALUE(${idUser}, ${products[i].MaSanPham}, '${products[i].LoaiSanPham}', ${products[i].DonGia},
                         ${products[i].SoLuongMua}, '${dateTime}', '${billInfo.name}', '${billInfo.phone}', '${billInfo.email}', '${billInfo.address}', ${statusBill}, '${billInfo.message}');`
@@ -171,11 +171,11 @@ class CartService{
     async getBill(idUser){
         try{
             let bills = await sequelize.query(
-                `SELECT don_hang.*, san_pham.TenSanPham, loai_san_pham.TenLoaiSanPham
-                FROM don_hang JOIN san_pham ON don_hang.MaSanPham = san_pham.MaSanPham
-                        JOIN loai_san_pham ON don_hang.LoaiSanPham = loai_san_pham.LoaiSanPham
-                            AND don_hang.MaSanPham = loai_san_pham.MaSanPham
-                WHERE don_hang.MaKhachHang = ${idUser} ORDER BY don_hang.ThoiGian DESC`,
+                `SELECT DON_HANG.*, SAN_PHAM.TenSanPham, LOAI_SAN_PHAM.TenLoaiSanPham
+                FROM DON_HANG JOIN SAN_PHAM ON DON_HANG.MaSanPham = SAN_PHAM.MaSanPham
+                        JOIN LOAI_SAN_PHAM ON DON_HANG.LoaiSanPham = LOAI_SAN_PHAM.LoaiSanPham
+                            AND DON_HANG.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                WHERE DON_HANG.MaKhachHang = ${idUser} ORDER BY DON_HANG.ThoiGian DESC`,
                 {type: QueryTypes.SELECT}
             )            
             
