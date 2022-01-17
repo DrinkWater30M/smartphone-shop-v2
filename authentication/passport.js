@@ -11,7 +11,7 @@ passport.use(new LocalStrategy(
     },
     async function(req, email, password, done) {
         try{
-            let user = await authenticationService.getUserInformation(email);
+            let user = await authenticationService.getAccount(email);
             
             if (!user) {
                 return done(null, false, 

@@ -11,7 +11,7 @@ class CartService{
                     (SELECT HINH_ANH_SAN_PHAM.HinhAnh FROM HINH_ANH_SAN_PHAM WHERE HINH_ANH_SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham LIMIT 0,1) AS HinhAnh
                 FROM GIO_YEU_THICH JOIN LOAI_SAN_PHAM ON GIO_YEU_THICH.LoaiSanPham = LOAI_SAN_PHAM.LoaiSanPham 
                     AND GIO_YEU_THICH.MaSanPham = LOAI_SAN_PHAM.MaSanPham
-                    JOIN SAN_PHAM ON GIO_YEU_THICH.MaSanPham = san_pham.MaSanPham
+                    JOIN SAN_PHAM ON GIO_YEU_THICH.MaSanPham = SAN_PHAM.MaSanPham
                 WHERE GIO_YEU_THICH.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT}
             );

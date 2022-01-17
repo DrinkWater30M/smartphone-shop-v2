@@ -99,14 +99,13 @@ class ProductsService{
 
             //Query
             let products = await sequelize.query(
-                `SELECT SAN_PHAM.MaSanPham, SAN_PHAM.TenSanPham, SAN_PHAM.MoTa,
-                MIN(LOAI_SAN_PHAM.DonGia) AS DonGiaNhoNhat, THUONG_HIEU.ThuongHieu, LOAI_SAN_PHAM.*,
+                `SELECT SAN_PHAM.*, LOAI_SAN_PHAM.*,
+                LOAI_SAN_PHAM.DonGia AS DonGiaNhoNhat, THUONG_HIEU.ThuongHieu,
                     (SELECT HINH_ANH_SAN_PHAM.HinhAnh FROM HINH_ANH_SAN_PHAM
                         WHERE HINH_ANH_SAN_PHAM.MaSanPham = SAN_PHAM.MaSanPham LIMIT 1) AS HinhAnhDaiDien
                 FROM SAN_PHAM join LOAI_SAN_PHAM ON SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham
                 JOIN THUONG_HIEU ON SAN_PHAM.MaThuongHieu = THUONG_HIEU.MaThuongHieu
                 ${filter}
-                GROUP BY SAN_PHAM.MaSanPham
                 ${sort}
                 LIMIT ${offset}, ${itemsPerPage};`,
                 {type: QueryTypes.SELECT}
@@ -119,10 +118,18 @@ class ProductsService{
         }
     }
     
-    getBrandsList(){
-        return models.thuong_hieu.findAll({
-            raw: true
-        })
+    async getBrandsList(){
+        try{
+            let brands = await sequelize.query(
+                `SELECT * FROM THUONG_HIEU ORDER BY THUONG_HIEU.ThuongHieu ASC`,
+                {type: QueryTypes.SELECT}
+            )            
+            
+            return brands
+        }
+        catch(error){
+            console.log(error);
+        }
     }
     
     // async getProductDetail(id){
