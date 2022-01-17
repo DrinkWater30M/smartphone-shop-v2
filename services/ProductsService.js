@@ -63,16 +63,16 @@ class ProductsService{
             //Create condition filter
             let filterSearch = "";
             if(currentSearch){
-                filterSearch = `AND (san_pham.TenSanPham like '%${currentSearch}%' 
-                    OR loai_san_pham.TenLoaiSanPham like '%${currentSearch}%')`;
+                filterSearch = `AND (SAN_PHAM.TenSanPham like '%${currentSearch}%' 
+                    OR LOAI_SAN_PHAM.TenLoaiSanPham like '%${currentSearch}%')`;
             }
 
-            let filterBrand = currentBrand ? `AND thuong_hieu.MaThuongHieu = '${currentBrand}'` : "";
-            let filterColor = currentColor ? `AND loai_san_pham.MauSac = '${currentColor}'` : "";
-            let filterRam = currentRam ? `AND loai_san_pham.Ram = ${currentRam}` : "";
-            let filterRom = currentRom ? `AND loai_san_pham.Rom = ${currentRom}` : "";
+            let filterBrand = currentBrand ? `AND THUONG_HIEU.MaThuongHieu = '${currentBrand}'` : "";
+            let filterColor = currentColor ? `AND LOAI_SAN_PHAM.MauSac = '${currentColor}'` : "";
+            let filterRam = currentRam ? `AND LOAI_SAN_PHAM.Ram = ${currentRam}` : "";
+            let filterRom = currentRom ? `AND LOAI_SAN_PHAM.Rom = ${currentRom}` : "";
             let filterPrice = (currentMinPrice && currentMaxPrice) ? 
-                `AND (loai_san_pham.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice})` : "";
+                `AND (LOAI_SAN_PHAM.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice})` : "";
             let filter = "";
             if(filterSearch || filterBrand || filterColor || filterRam ||filterRom || filterPrice){
                 filter = "WHERE " + filterSearch + filterBrand + filterColor + filterRam + filterRom + filterPrice;
@@ -84,13 +84,13 @@ class ProductsService{
             //Create condition sort
             let typeSort = [
                 "",
-                "san_pham.TenSanPham ASC",
-                "san_pham.TenSanPham DESC",
+                "SAN_PHAM.TenSanPham ASC",
+                "SAN_PHAM.TenSanPham DESC",
                 "DonGiaNhoNhat ASC",
                 "DonGiaNhoNhat DESC",
                 "rand()",
-                "loai_san_pham.Pin DESC",
-                "loai_san_pham.Rom DESC",
+                "LOAI_SAN_PHAM.Pin DESC",
+                "LOAI_SAN_PHAM.Rom DESC",
             ]
             let sort = currentSort ? `ORDER BY ${typeSort[currentSort]}` : "";
 
@@ -99,14 +99,14 @@ class ProductsService{
 
             //Query
             let products = await sequelize.query(
-                `SELECT san_pham.MaSanPham, san_pham.TenSanPham, san_pham.MoTa,
-                MIN(loai_san_pham.DonGia) AS DonGiaNhoNhat, thuong_hieu.ThuongHieu, loai_san_pham.*,
-                    (SELECT hinh_anh_san_pham.HinhAnh FROM hinh_anh_san_pham
-                        WHERE hinh_anh_san_pham.MaSanPham = san_pham.MaSanPham LIMIT 1) AS HinhAnhDaiDien
-                FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
-                JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
+                `SELECT SAN_PHAM.MaSanPham, SAN_PHAM.TenSanPham, SAN_PHAM.MoTa,
+                MIN(LOAI_SAN_PHAM.DonGia) AS DonGiaNhoNhat, THUONG_HIEU.ThuongHieu, LOAI_SAN_PHAM.*,
+                    (SELECT HINH_ANH_SAN_PHAM.HinhAnh FROM HINH_ANH_SAN_PHAM
+                        WHERE HINH_ANH_SAN_PHAM.MaSanPham = SAN_PHAM.MaSanPham LIMIT 1) AS HinhAnhDaiDien
+                FROM SAN_PHAM join LOAI_SAN_PHAM ON SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                JOIN THUONG_HIEU ON SAN_PHAM.MaThuongHieu = THUONG_HIEU.MaThuongHieu
                 ${filter}
-                GROUP BY san_pham.MaSanPham
+                GROUP BY SAN_PHAM.MaSanPham
                 ${sort}
                 LIMIT ${offset}, ${itemsPerPage};`,
                 {type: QueryTypes.SELECT}
@@ -174,17 +174,17 @@ class ProductsService{
             //Get products
             let productList = await sequelize.query(
                 `SELECT *
-                FROM san_pham join loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
-                    JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
-                WHERE san_pham.MaSanPham = ${idProduct}`,
+                FROM SAN_PHAM join LOAI_SAN_PHAM ON SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                    JOIN THUONG_HIEU ON SAN_PHAM.MaThuongHieu = THUONG_HIEU.MaThuongHieu
+                WHERE SAN_PHAM.MaSanPham = ${idProduct}`,
                 {type: QueryTypes.SELECT}
             );
 
             //Get images of product
             let images = await sequelize.query(
-                `SELECT hinh_anh_san_pham.HinhAnh
-                FROM hinh_anh_san_pham
-                WHERE hinh_anh_san_pham.MaSanPham = '${idProduct}'`,
+                `SELECT HINH_ANH_SAN_PHAM.HinhAnh
+                FROM HINH_ANH_SAN_PHAM
+                WHERE HINH_ANH_SAN_PHAM.MaSanPham = '${idProduct}'`,
                 {type: QueryTypes.SELECT}
             );
 
@@ -225,16 +225,16 @@ class ProductsService{
     async getRelatedProducts(id){
         try{
             let relatedProducts = await sequelize.query(
-                `SELECT san_pham.MaSanPham, san_pham.TenSanPham, thuong_hieu.ThuongHieu,
-                    MIN(loai_san_pham.DonGia) AS DonGiaThapNhat,  MAX(loai_san_pham.DonGia) AS DonGiaCaoNhat,
-                    (SELECT hinh_anh_san_pham.HinhAnh 
-                    FROM hinh_anh_san_pham 
-                    WHERE hinh_anh_san_pham.MaSanPham = san_pham.MaSanPham
+                `SELECT SAN_PHAM.MaSanPham, SAN_PHAM.TenSanPham, THUONG_HIEU.ThuongHieu,
+                    MIN(LOAI_SAN_PHAM.DonGia) AS DonGiaThapNhat,  MAX(LOAI_SAN_PHAM.DonGia) AS DonGiaCaoNhat,
+                    (SELECT HINH_ANH_SAN_PHAM.HinhAnh 
+                    FROM HINH_ANH_SAN_PHAM 
+                    WHERE HINH_ANH_SAN_PHAM.MaSanPham = SAN_PHAM.MaSanPham
                     LIMIT 0, 1) AS HinhAnh
-                FROM san_pham JOIN loai_san_pham ON san_pham.MaSanPham = loai_san_pham.MaSanPham
-                    JOIN thuong_hieu ON san_pham.MaThuongHieu = thuong_hieu.MaThuongHieu
-                WHERE san_pham.MaThuongHIeu = (SELECT san_pham.MaThuongHieu FROM san_pham WHERE san_pham.MaSanPham = '${id}')
-                GROUP BY san_pham.MaSanPham`,
+                FROM SAN_PHAM JOIN LOAI_SAN_PHAM ON SAN_PHAM.MaSanPham = LOAI_SAN_PHAM.MaSanPham
+                    JOIN THUONG_HIEU ON SAN_PHAM.MaThuongHieu = THUONG_HIEU.MaThuongHieu
+                WHERE SAN_PHAM.MaThuongHIeu = (SELECT SAN_PHAM.MaThuongHieu FROM SAN_PHAM WHERE SAN_PHAM.MaSanPham = '${id}')
+                GROUP BY SAN_PHAM.MaSanPham`,
                 {type: QueryTypes.SELECT}
             );
 
@@ -248,12 +248,12 @@ class ProductsService{
     async getSomeRating(idProduct, offset, count){
         try{
             let someRating = await sequelize.query(
-                `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, khach_hang.Email,
-                binh_luan.DanhGia, binh_luan.NoiDung, binh_luan.ThoiGian
-                FROM binh_luan JOIN san_pham ON binh_luan.MaSanPham = san_pham.MaSanPham
-                JOIN khach_hang ON binh_luan.MaKhachHang = khach_hang.MaKhachHang
-                WHERE san_pham.MaSanPham = '${idProduct}'
-                ORDER BY binh_luan.ThoiGian DESC
+                `SELECT KHACH_HANG.MaKhachHang, KHACH_HANG.HoTen, KHACH_HANG.Email,
+                BINH_LUAN.DanhGia, BINH_LUAN.NoiDung, BINH_LUAN.ThoiGian
+                FROM BINH_LUAN JOIN SAN_PHAM ON BINH_LUAN.MaSanPham = SAN_PHAM.MaSanPham
+                JOIN KHACH_HANG ON BINH_LUAN.MaKhachHang = KHACH_HANG.MaKhachHang
+                WHERE SAN_PHAM.MaSanPham = '${idProduct}'
+                ORDER BY BINH_LUAN.ThoiGian DESC
                 LIMIT ${offset}, ${count}`,
                 {type: QueryTypes.SELECT}
             );
@@ -283,9 +283,9 @@ class ProductsService{
     async totalRating(id){
         try{
             let totalRating = await sequelize.query(
-                `SELECT COUNT(binh_luan.MaBinhLuan) as TongDanhGia, AVG(binh_luan.DanhGia) as SaoTrungBinh
-                FROM binh_luan JOIN san_pham ON binh_luan.MaSanPham = san_pham.MaSanPham 
-                WHERE san_pham.MaSanPham = '${id}'`,
+                `SELECT COUNT(BINH_LUAN.MaBinhLuan) as TongDanhGia, AVG(BINH_LUAN.DanhGia) as SaoTrungBinh
+                FROM BINH_LUAN JOIN SAN_PHAM ON BINH_LUAN.MaSanPham = SAN_PHAM.MaSanPham 
+                WHERE SAN_PHAM.MaSanPham = '${id}'`,
                 {type: QueryTypes.SELECT}
             )
 
@@ -308,13 +308,13 @@ class ProductsService{
         //Write data to DB
         try{
             await sequelize.query(
-                `INSERT INTO binh_luan(MaSanPham, MaKhachHang, DanhGia, NoiDung, ThoiGian)
+                `INSERT INTO BINH_LUAN(MaSanPham, MaKhachHang, DanhGia, NoiDung, ThoiGian)
                 VALUE('${idProduct}', ${idUser}, ${rating}, '${content}', '${dateTime}')`
             );
 
             let user = await sequelize.query(
-                `SELECT khach_hang.MaKhachHang, khach_hang.HoTen, khach_hang.Email
-                FROM khach_hang WHERE khach_hang.MaKhachHang = ${idUser}`,
+                `SELECT KHACH_HANG.MaKhachHang, KHACH_HANG.HoTen, KHACH_HANG.Email
+                FROM KHACH_HANG WHERE KHACH_HANG.MaKhachHang = ${idUser}`,
                 {type: QueryTypes.SELECT});
             
             return {user: user[0], rating, content, dateTime: new Date(dateTime.replace(" ", "T") + "Z").toString()};
