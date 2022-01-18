@@ -73,6 +73,7 @@ class ProductsService{
             let filterRom = currentRom ? ` AND LOAI_SAN_PHAM.Rom = ${currentRom}` : "";
             let filterPrice = (currentMinPrice && currentMaxPrice) ? 
                 ` AND (LOAI_SAN_PHAM.DonGia BETWEEN ${currentMinPrice} AND ${currentMaxPrice})` : "";
+
             let filter = "";
             if(filterSearch || filterBrand || filterColor || filterRam ||filterRom || filterPrice){
                 filter = "WHERE " + filterSearch + filterBrand + filterColor + filterRam + filterRom + filterPrice;
