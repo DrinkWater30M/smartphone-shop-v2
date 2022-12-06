@@ -11,15 +11,20 @@ class MiddleWare{
     }
 
     async isVerify(req, res, next){
-        let user = await userService.getUserInformation(req.user.MaKhachHang);
+        //VERIFY ACCOUNT
+        //02/05/2022 Google changed send email method, so app is going to update early. Now, not verify account.
+        // let user = await userService.getUserInformation(req.user.MaKhachHang);
 
-        //Check verify
-        if(user.XacMinhTaiKhoan == 1){
-            next();
-        }
-        else{
-            res.redirect('/user/account?tab=email-verification');
-        }
+        // //Check verify
+        // if(user.XacMinhTaiKhoan == 1){
+        //     next();
+        // }
+        // else{
+        //     res.redirect('/user/account?tab=email-verification');
+        // }
+
+        //NOT VERIFY ACCOUNT
+        next();
     }
 
     async isBlock(req, res, next){

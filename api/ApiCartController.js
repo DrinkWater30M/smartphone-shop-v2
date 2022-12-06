@@ -163,7 +163,8 @@ class ApiCartController{
                 
                 //status bill
                 bill.TrangThaiDonHang = bill.TrangThaiDonHang == 0 ? 'Chờ duyệt!' 
-                    : (bill.TrangThaiDonHang == 1 ? 'Đang giao!' : 'Đã giao!');
+                    : (bill.TrangThaiDonHang == 1 ? 'Đang giao!' 
+                        : (bill.TrangThaiDonHang == 2 ? 'Đã giao!' : "Đã hủy!"));
 
                 //date time of bill
                 let dateTime = bill.ThoiGian.toLocaleString();
