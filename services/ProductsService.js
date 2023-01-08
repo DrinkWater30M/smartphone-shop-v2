@@ -1,8 +1,6 @@
 'use strict';
 const Sequelize = require('sequelize');
-const { Op } = require('sequelize/dist');
-const { SELECT } = require('sequelize/dist/lib/query-types');
-const { QueryTypes } = require('sequelize/dist/lib/sequelize');
+const { QueryTypes } = require('sequelize');
 const {sequelize, models} = require('../models/index');
 
 class ProductsService{
