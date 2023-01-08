@@ -1,7 +1,7 @@
 'use strict';
 const Sequelize = require('sequelize');
 const {sequelize, models} = require('../models/index');
-const { QueryTypes } = require('sequelize/dist/lib/sequelize');
+const { QueryTypes } = require('sequelize');
 
 class AuthenticationService{
     async getAccount(email){

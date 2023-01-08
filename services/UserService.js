@@ -1,7 +1,7 @@
 'use strict';
 const {sequelize, models} = require('../models/index');
 const bcrypt = require('bcrypt');
-const { QueryTypes } = require('sequelize/dist');
+const { QueryTypes } = require('sequelize');
 
 class UserService{
     async getUserInformation(idUser){

@@ -1,6 +1,6 @@
 'use strict';
 const {sequelize, models} = require('../models/index');
-const { QueryTypes } = require('sequelize/dist');
+const { QueryTypes } = require('sequelize');
 
 class CartService{
     async getWishList(idUser){
