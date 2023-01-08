@@ -1,2 +1,2 @@
 # node modules will be install in local
-/node_modules
+node_modules/
