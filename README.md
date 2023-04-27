@@ -1,4 +1,4 @@
-# Welcome evyeryone to this repo
+# Welcome everyone to this repo, I am glad to see you, relax and enjoy.
 
 ## Description: 
 A online shopping platform for purchasing smartphones.
@@ -26,5 +26,5 @@ A online shopping platform for purchasing smartphones.
  - etc, will be update later.
 
 ## Product link(maybe will be shutdown cause using free hosting): 
- - the-smartphone-shop.up.railway.app
+ - https://the-smartphone-shop.up.railway.app
  
